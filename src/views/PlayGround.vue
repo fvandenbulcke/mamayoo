@@ -33,6 +33,7 @@
         <v-btn
           large color="primary"
           :disabled="!actionIsAvaillable"
+          @click="giveSelectedCards"
         >
           sendCards
         </v-btn>
@@ -109,8 +110,7 @@ export default {
     },
 
     giveSelectedCards() {
-      const cardsToGive = this.playerCards.filter((c) => this.selectedCardIds.includes(c.id));
-      this.giveCardsToNeighbour(cardsToGive)
+      this.giveCardsToNeighbour(this.selectedCardIds)
         .then(() => { this.selectedCardIds = []; });
     },
   },
