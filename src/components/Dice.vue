@@ -9,13 +9,23 @@
       }"
       :data-roll="roll" id="die-1"
       >
-        <li
-          v-for="side in sides"
-          :key="`side-${side}`"
-          class="die-item"
-          :data-side="side"
-        >
-          <span v-for="d in side" :key="`dot-${d}`" class="dot"></span>
+        <li class="die-item" data-side="1" >
+          <span class="die-face red--text">♦</span>
+        </li>
+        <li class="die-item" data-side="2">
+          <span class="die-face red--text">♥</span>
+        </li>
+        <li class="die-item" data-side="3">
+          <span class="die-face">♣</span>
+        </li>
+        <li class="die-item" data-side="4">
+          <span class="die-face">♠</span>
+        </li>
+        <li class="die-item" data-side="5">
+          <span class="die-face red--text">♦</span>
+        </li>
+        <li class="die-item" data-side="6">
+          <span class="die-face">♣</span>
         </li>
       </ol>
     </div>
@@ -42,7 +52,7 @@ export default {
 
   data() {
     return {
-      sides: 8,
+      sides: 6,
       dataRoll: 1,
       roll: 1,
       oddRoll: false,
@@ -54,7 +64,7 @@ export default {
     rollDice() {
       this.oddRoll = !this.oddRoll;
       this.evenRoll = !this.evenRoll;
-      this.roll = 3;// this.getRandomNumber(1, 8);
+      this.roll = this.getRandomNumber(1, 4);
     },
 
     toggleClasses(die) {
@@ -118,23 +128,16 @@ export default {
     box-shadow: inset -0.35rem 0.35rem 0.75rem rgba(0, 0, 0, 0.3),
       inset 0.5rem -0.25rem 0.5rem rgba(0, 0, 0, 0.15);
     display: grid;
-    grid-template-areas: "one two three" "four five six" "seven eight nine";
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "one";
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     height: 100%;
-    padding: 1rem;
     position: absolute;
     width: 100%;
   }
-  .dot {
-    align-self: center;
-    background-color: #676767;
-    border-radius: 50%;
-    box-shadow: inset -0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.5);
-    display: block;
-    height: 1.25rem;
+  .die-face {
     justify-self: center;
-    width: 1.25rem;
+    font-size: 4em;
   }
   .even-roll[data-roll="1"] {
     transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg);
@@ -189,69 +192,6 @@ export default {
   }
   [data-side="6"] {
     transform: rotate3d(1, 0, 0, 180deg) translateZ(3rem);
-  }
-  [data-side="1"] .dot:nth-of-type(1) {
-    grid-area: five;
-  }
-  [data-side="2"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="2"] .dot:nth-of-type(2) {
-    grid-area: nine;
-  }
-  [data-side="3"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="3"] .dot:nth-of-type(2) {
-    grid-area: five;
-  }
-  [data-side="3"] .dot:nth-of-type(3) {
-    grid-area: nine;
-  }
-  [data-side="4"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="4"] .dot:nth-of-type(2) {
-    grid-area: three;
-  }
-  [data-side="4"] .dot:nth-of-type(3) {
-    grid-area: seven;
-  }
-  [data-side="4"] .dot:nth-of-type(4) {
-    grid-area: nine;
-  }
-  [data-side="5"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="5"] .dot:nth-of-type(2) {
-    grid-area: three;
-  }
-  [data-side="5"] .dot:nth-of-type(3) {
-    grid-area: five;
-  }
-  [data-side="5"] .dot:nth-of-type(4) {
-    grid-area: seven;
-  }
-  [data-side="5"] .dot:nth-of-type(5) {
-    grid-area: nine;
-  }
-  [data-side="6"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="6"] .dot:nth-of-type(2) {
-    grid-area: three;
-  }
-  [data-side="6"] .dot:nth-of-type(3) {
-    grid-area: four;
-  }
-  [data-side="6"] .dot:nth-of-type(4) {
-    grid-area: six;
-  }
-  [data-side="6"] .dot:nth-of-type(5) {
-    grid-area: seven;
-  }
-  [data-side="6"] .dot:nth-of-type(6) {
-    grid-area: nine;
   }
 
   button {
