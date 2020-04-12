@@ -46,9 +46,9 @@
 </template>
 
 <script>
-import PlayerCards from '@/components/PlayerCards';
-import OtherPlayer from '@/components/OtherPlayer';
-import Player from '@/components/Player';
+import PlayerCards from '@/components/players/PlayerCards';
+import OtherPlayer from '@/components/players/OtherPlayer';
+import Player from '@/archives/Player';
 
 export default {
   components: {

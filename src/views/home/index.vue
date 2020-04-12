@@ -12,7 +12,9 @@
             offset-md="1"
             class="d-flex justify-center"
           >
-            <CreateTableButton/>
+            <CreateTableButton
+              :on-click="createNewTable"
+            />
           </v-col>
         </v-row>
         <v-row
@@ -23,7 +25,7 @@
             v-for="table in tables"
             :key="table.id"
             :table="table"
-            :on-click="() => selectTable(table.id)"
+            :on-click="selectTable"
           />
         </v-row>
       </v-col>
@@ -37,6 +39,7 @@ import { mapActions } from 'vuex';
 import mamayooService from '@/services/mamayooService';
 import CreateTableButton from './CreateTableButton';
 import MamayooTableLine from './MamayooTableLine';
+
 
 export default {
   name: 'Home',
@@ -53,10 +56,19 @@ export default {
   },
 
   methods: {
-    ...mapActions(['joinTable']),
-    selectTable(tableId) {
-      this.joinTable(tableId)
-        .then(() => this.$router.push({ name: 'playground' }));
+    ...mapActions(['createTable', 'savePlayer']),
+    createNewTable() {
+      mamayooService.createTable()
+        .then((table) => this.goToPlayView(table));
+    },
+
+    selectTable({ table, pseudo }) {
+      this.savePlayer(pseudo)
+        .then(() => this.goToPlayView(table));
+    },
+
+    goToPlayView(table) {
+      this.$router.push({ name: 'playground', query: { table } });
     },
   },
 

@@ -10,7 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     orderedSuits: ['payoo', 'heart', 'diamond', 'spade', 'club'],
-    playerId: 'player0',
+    player: 'player0',
     gameState: {
       turnNumber: 1,
       status: 'give_card',

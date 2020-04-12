@@ -67,10 +67,10 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import OtherPlayer from '@/components/OtherPlayer';
-import PlayerCards from '@/components/PlayerCards';
-import DiceRolling from '@/views/DiceRolling';
-import Dice from '@/components/Dice';
+import OtherPlayer from '@/components/players/OtherPlayer';
+import PlayerCards from '@/components/players/PlayerCards';
+import DiceRolling from '@/components/dices/DiceRolling';
+import Dice from '@/components/dices/Dice';
 
 export default {
   name: 'PlayGround',
@@ -94,18 +94,10 @@ export default {
       const cardIdsWithoutSelected = this.selectedCardIds.filter((c) => c !== cardId);
       if (cardIdsWithoutSelected.length === this.selectedCardIds.length) {
         // ajout
-        this.addCardToselect(cardId);
+        this.selectedCardIds.push(cardId);
       } else {
         // suppression
         this.selectedCardIds = cardIdsWithoutSelected;
-        this.$emit('cardSelectIsNotReady');
-      }
-    },
-
-    addCardToselect(cardId) {
-      this.selectedCardIds.push(cardId);
-      if (this.selectedCardIds.length === this.maxCardToSelect) {
-        this.$emit('cardSelectIsReady');
       }
     },
 

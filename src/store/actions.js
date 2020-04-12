@@ -1,16 +1,22 @@
+import Vue from 'vue';
 import groupBy from 'lodash/groupBy';
 
 import mamayooService from '@/services/mamayooService';
 import mutationTypes from './mutationsTypes';
 
 export default {
+  savePlayer({ commit }, player) {
+    return commit(mutationTypes.SAVE_PLAYER, player);
+  },
   createTable({ dispatch }) {
     return mamayooService.createTable()
       .then((response) => dispatch('joinTable', response.createdTable));
   },
-  joinTable({ commit }, tableId) {
-    return mamayooService.joinTable(tableId)
-      .then((newState) => commit(mutationTypes.SAVE_GAME_STATE, newState));
+  joinTable(tableId) {
+    Vue.prototype.$socket.send({
+      value: tableId,
+      action: 'GAME_JOIN',
+    });
   },
   giveCardsToNeighbour({ getters, commit }, cardIds) {
     const cards = groupBy(getters.playerCards, (card) => cardIds.includes(card.id));
