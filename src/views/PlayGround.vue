@@ -13,13 +13,11 @@
       <v-col
         class="d-flex justify-center"
       >
-        <OtherPlayer/>
-        <OtherPlayer/>
-        <OtherPlayer/>
-        <OtherPlayer/>
-        <OtherPlayer/>
-        <OtherPlayer/>
-        <OtherPlayer/>
+        <OtherPlayer
+          v-for="otherPlayer in otherPlayers"
+          :key="otherPlayer.id"
+          :player="otherPlayer"
+        />
       </v-col>
     </v-row>
 
@@ -31,16 +29,21 @@
       <v-col
         class="d-flex justify-center"
       >
+      <template v-if="gameStatus === 'give_card'">
         <v-btn
           large color="primary"
-          @click="roll"
+          :disabled="!actionIsAvaillable"
         >
-          ROLL
+          sendCards
         </v-btn>
-        <dice-roller ref="diceroller" :count="1" :whiteBackground="true"/>
+      </template>
+      <template v-else-if="gameStatus === 'roll_dice'">
+        <DiceRolling/>
         <Dice/>
+      </template>
       </v-col>
     </v-row>
+
     <v-row
       align="end"
       no-gutters
@@ -52,6 +55,8 @@
       >
         <PlayerCards
           class="pa-2"
+          :game-cards="gameCards"
+          :on-card-click="changeCardSelect"
         />
       </v-col>
     </v-row>
@@ -59,9 +64,11 @@
 </template>
 
 <script>
-import { DiceRoller } from 'vue-dice-roller';
+import { mapGetters, mapActions } from 'vuex';
+
 import OtherPlayer from '@/components/OtherPlayer';
 import PlayerCards from '@/components/PlayerCards';
+import DiceRolling from '@/views/DiceRolling';
 import Dice from '@/components/Dice';
 
 export default {
@@ -69,12 +76,63 @@ export default {
   components: {
     PlayerCards,
     OtherPlayer,
-    DiceRoller,
+    DiceRolling,
     Dice,
   },
+
+  data() {
+    return {
+      selectedCardIds: [],
+    };
+  },
+
   methods: {
-    roll() {
-      this.$refs.diceroller.roll();
+    ...mapActions(['giveCardsToNeighbour']),
+
+    changeCardSelect(cardId) {
+      const cardIdsWithoutSelected = this.selectedCardIds.filter((c) => c !== cardId);
+      if (cardIdsWithoutSelected.length === this.selectedCardIds.length) {
+        // ajout
+        this.addCardToselect(cardId);
+      } else {
+        // suppression
+        this.selectedCardIds = cardIdsWithoutSelected;
+        this.$emit('cardSelectIsNotReady');
+      }
+    },
+
+    addCardToselect(cardId) {
+      this.selectedCardIds.push(cardId);
+      if (this.selectedCardIds.length === this.maxCardToSelect) {
+        this.$emit('cardSelectIsReady');
+      }
+    },
+
+    giveSelectedCards() {
+      const cardsToGive = this.playerCards.filter((c) => this.selectedCardIds.includes(c.id));
+      this.giveCardsToNeighbour(cardsToGive)
+        .then(() => { this.selectedCardIds = []; });
+    },
+  },
+
+  computed: {
+    ...mapGetters(['gameState', 'playerCards', 'otherPlayers', 'gameStatus']),
+
+    actionIsAvaillable() {
+      return this.selectedCardIds.length >= this.gameState.maxCardToSelect;
+    },
+
+    gameCards() {
+      return this.playerCards.map((c) => {
+        const isSelected = this.selectedCardIds.includes(c.id);
+        const isSelectable = isSelected
+          || this.selectedCardIds.length < this.gameState.maxCardToSelect;
+        return {
+          card: c,
+          isSelected,
+          isSelectable,
+        };
+      });
     },
   },
 };

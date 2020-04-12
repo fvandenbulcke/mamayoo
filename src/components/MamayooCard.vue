@@ -2,21 +2,21 @@
   <v-container
     class="lighten-5 pa-0 mam-container"
     :class="classObject"
-    @click="changeCardSelect"
+    @click="select"
   >
     <v-row
       no-gutters
       style="height: 150px;"
     >
       <v-col align-self="start" class="pl-2">
-        <span class="d-inline-flex mam-card">{{ suitIcons[suit] }}</span>
+        <span class="d-inline-flex mam-card">{{ suitIcons[card.suit] }}</span>
         <!-- <v-icon>home</v-icon> -->
       </v-col>
       <v-col align-self="center">
-        <span class="d-inline-flex mam-card">{{ value }}</span>
+        <span class="d-inline-flex mam-card">{{ card.value }}</span>
       </v-col>
       <v-col align-self="end" class="pr-2">
-        <span class="d-inline-flex mam-card">{{ suitIcons[suit] }}</span>
+        <span class="d-inline-flex mam-card">{{ suitIcons[card.suit] }}</span>
       </v-col>
     </v-row>
   </v-container>
@@ -28,23 +28,19 @@ export default {
   name: 'MamayooCard',
 
   props: {
-    id: {
-      type: String,
+    card: {
+      type: Object,
       required: true,
     },
-    suit: {
-      type: String,
+    isSelected: {
+      type: Boolean,
       required: true,
     },
-    value: {
-      type: String,
+    isDisable: {
+      type: Boolean,
       required: true,
     },
-    select: {
-      type: Function,
-      required: true,
-    },
-    unSelect: {
+    onClick: {
       type: Function,
       required: true,
     },
@@ -59,29 +55,23 @@ export default {
         club: '♣',
         payoo: 'P',
       },
-      isSelected: false,
     };
   },
 
   computed: {
     classObject() {
       return {
-        'card-font-red': ['heart', 'diamond'].includes(this.suit),
-        'card-font-black': ['spade', 'club'].includes(this.suit),
+        'card-font-red': ['heart', 'diamond'].includes(this.card.suit),
+        'card-font-black': ['spade', 'club'].includes(this.card.suit),
         'card-selected': this.isSelected,
       };
     },
   },
 
   methods: {
-    changeCardSelect() {
-      if (!this.isSelected) {
-        this.select(this.id)
-          .then((cardSelectHaveBeenSaved) => { this.isSelected = cardSelectHaveBeenSaved; });
-      }
-      if (this.isSelected) {
-        this.unSelect(this.id)
-          .then((cardSelectHaveBeenRemoved) => { this.isSelected = !cardSelectHaveBeenRemoved; });
+    select() {
+      if (!this.isDisable) {
+        this.onClick();
       }
     },
   },

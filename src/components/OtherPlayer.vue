@@ -5,19 +5,16 @@
     tile
   >
     <v-card-title>
-      Other Player
+      {{ player.name }}
     </v-card-title>
     <v-card-subtitle>
       Select cards to give
     </v-card-subtitle>
     <v-card-text>
-      <div class="d-inline-flex">
-        <BackCard
-          v-for="i in 5"
-          :key="i"
-          :value="i"
-        />
-      </div>
+      <BackCard
+        :value="player.points"
+      />
+      <v-btn v-if="haveToPlay" text small loading>Normal</v-btn>
     </v-card-text>
   </v-card>
 </template>
@@ -29,6 +26,17 @@ export default {
   name: 'OtherPlayer',
   components: {
     BackCard,
+  },
+  props: {
+    player: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    haveToPlay() {
+      return this.player.status === 'playing';
+    },
   },
 };
 </script>
