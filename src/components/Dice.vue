@@ -54,7 +54,7 @@ export default {
     rollDice() {
       this.oddRoll = !this.oddRoll;
       this.evenRoll = !this.evenRoll;
-      this.roll = this.getRandomNumber(1, 8);
+      this.roll = 3;// this.getRandomNumber(1, 8);
     },
 
     toggleClasses(die) {

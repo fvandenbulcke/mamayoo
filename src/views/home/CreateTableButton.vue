@@ -36,8 +36,8 @@ export default {
 };
 </script>
 <style scoped>
-.button {
-  width: 200px !important;
-  height: 100% !important;
-}
+  .button {
+    width: 200px !important;
+    height: 100% !important;
+  }
 </style>

@@ -1,4 +1,15 @@
+import axios from 'axios';
+
+const httpClient = axios.create({
+  baseURL: 'http://localhost:8090',
+  'Content-Type': 'application/json',
+});
+
 export default {
+  getTableList() {
+    return httpClient.get('/games')
+      .then((response) => response && response.data);
+  },
   /**
    * Get the customer points
    * @public

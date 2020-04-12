@@ -14,13 +14,17 @@
           >
             <CreateTableButton/>
           </v-col>
-          <v-col
-            md="2"
-            offset-md="1"
-            class="d-flex justify-center"
-          >
-            <JoinTableButton/>
-          </v-col>
+        </v-row>
+        <v-row
+          justify="center"
+          class="d-flex"
+        >
+          <mamayoo-table-line
+            v-for="table in tables"
+            :key="table.id"
+            :table="table"
+            :on-click="() => selectTable(table.id)"
+          />
         </v-row>
       </v-col>
     </v-row>
@@ -28,40 +32,38 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
+import mamayooService from '@/services/mamayooService';
 import CreateTableButton from './CreateTableButton';
-import JoinTableButton from './JoinTableButton';
+import MamayooTableLine from './MamayooTableLine';
 
 export default {
   name: 'Home',
 
   components: {
     CreateTableButton,
-    JoinTableButton,
+    MamayooTableLine,
   },
 
   data() {
     return {
+      tables: null,
     };
   },
 
   methods: {
-    onClick() {
-      console.log('onClick');
+    ...mapActions(['joinTable']),
+    selectTable(tableId) {
+      this.joinTable(tableId)
+        .then(() => this.$router.push({ name: 'playground' }));
     },
+  },
+
+  created() {
+    mamayooService.getTableList()
+      .then((response) => { this.tables = response; });
   },
 
 };
 </script>
-<style scoped>
-.button {
-  width: 200px !important;
-  height: 100% !important;
-}
-
-/* .ikyButtonContent {
-  width: 100%;
-  padding: 5%;
-  display: table-column;
-  white-space: normal;
-} */
-</style>
