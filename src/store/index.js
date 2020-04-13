@@ -16,16 +16,16 @@ export default new Vuex.Store({
       turnNumber: 1,
       status: 'give_card',
       maxCardToSelect: 2,
-      player0: { points: 0, status: 'played' },
+      /* player0: { points: 0, status: 'played' },
       player1: { points: 10, status: 'played' },
       player2: { points: 20, status: 'played' },
       player3: { points: 30, status: 'playing' },
       player4: { points: 40, status: 'toPlay' },
       player5: { points: 50, status: 'toPlay' },
       player6: { points: 60, status: 'toPlay' },
-      player7: { points: 70, status: 'toPlay' },
+      player7: { points: 70, status: 'toPlay' }, */
     },
-    playerCards: [
+    playerCardsInit: [
       { suit: 'heart', value: '7' },
       { suit: 'diamond', value: '10' },
       { suit: 'payoo', value: '7' },
@@ -38,7 +38,8 @@ export default new Vuex.Store({
       { suit: 'diamond', value: '3' },
       { suit: 'spade', value: '10' },
     ],
-    otherPlayers: [
+    otherPlayers: [],
+    otherPlayersInit: [
       { id: 'player1', name: 'Thomas' },
       { id: 'player2', name: 'Lucie' },
       { id: 'player3', name: 'Julien' },

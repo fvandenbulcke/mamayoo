@@ -1,4 +1,4 @@
-// import Vue from 'vue';
+import groupBy from 'lodash/groupBy';
 
 import mutationTypes from './mutationsTypes';
 
@@ -26,8 +26,12 @@ export default {
   },
   // default handler called for all methods
   SOCKET_ONMESSAGE(state, message) {
-    console.log(message);
-    // state.socket.message = message;
+    const { gameInfo } = JSON.parse(message.data);
+    console.log(gameInfo);
+    console.log(Object.keys(gameInfo));
+    const groupPlayers = groupBy(gameInfo.players, (p) => p.name === state.player);
+    console.log(groupPlayers);
+    state.otherPlayers = groupPlayers.false;
   },
   // mutations for reconnect methods
   SOCKET_RECONNECT(state, count) {
