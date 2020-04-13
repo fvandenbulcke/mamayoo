@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/home';
-import PlayersCircleGrid from '@/views/PlayersCircleGrid';
-import PlayersCircleTranslate from '@/views/PlayersCircleTranslate';
-import PlayerCards from '@/components/PlayerCards';
+import PlayersCircleGrid from '@/archives/PlayersCircleGrid';
+import PlayersCircleTranslate from '@/archives/PlayersCircleTranslate';
+import PlayerCards from '@/components/players/PlayerCards';
+import PlayConnectionContainer from '@/components/container/PlayConnectionContainer';
 import PlayGround from '@/views/PlayGround';
 
 Vue.use(VueRouter);
@@ -23,8 +24,14 @@ const router = new VueRouter({
     },
     {
       path: '/playground', // /cards + liste des autres joueurs en cartes verticales
-      name: 'playground',
-      component: PlayGround,
+      component: PlayConnectionContainer,
+      children: [
+        {
+          path: '',
+          name: 'playground',
+          component: PlayGround,
+        },
+      ],
     },
     {
       path: '/circle/grid', // jeu avec la grille pour afficher les joueurs

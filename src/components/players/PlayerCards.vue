@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import MamayooCard from '@/components/MamayooCard';
+import MamayooCard from '@/components/cards/MamayooCard';
 
 export default {
   name: 'PlayerCards',

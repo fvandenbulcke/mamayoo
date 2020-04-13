@@ -20,19 +20,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
   name: 'CreateTableButton',
 
-  methods: {
-    ...mapActions(['createTable']),
-    onClick() {
-      this.createTable()
-        .then(() => this.$router.push({ name: 'playersCircleGrid' }));
+  props: {
+    onClick: {
+      type: Function,
+      required: true,
     },
   },
-
 };
 </script>
 <style scoped>

@@ -3,6 +3,10 @@ import groupBy from 'lodash/groupBy';
 const sortCards = (cardOne, cardTwo) => cardOne.value - cardTwo.value;
 
 export default {
+  player({ player }) {
+    return player;
+  },
+
   sortedPlayerCards({ orderedSuits, playerCards }) {
     const sortedCards = [];
     const groupedCards = groupBy(playerCards, 'suit');

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import BackCard from '@/components/BackCard';
+import BackCard from '@/components/cards/BackCard';
 
 export default {
   name: 'OtherPlayer',

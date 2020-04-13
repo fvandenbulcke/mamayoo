@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Player from '@/components/Player';
+import Player from '@/archives/Player';
 
 export default {
   name: 'PlayersCircle',
