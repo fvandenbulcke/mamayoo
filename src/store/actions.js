@@ -13,6 +13,7 @@ export default {
       .then((response) => dispatch('joinTable', response.createdTable));
   },
   joinTable(tableId) {
+    console.log(this.$socket);
     Vue.prototype.$socket.sendObj({
       value: tableId,
       action: 'GAME_JOIN',

@@ -22,7 +22,11 @@ export default {
   watch: {
     isConnected(newValue) {
       if (newValue) {
-        this.joinTable(this.table);
+        // this.joinTable(this.table);
+        this.$socket.send(JSON.stringify({
+          value: this.table,
+          action: 'GAME_JOIN',
+        }));
       }
     },
   },
