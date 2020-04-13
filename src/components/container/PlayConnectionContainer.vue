@@ -13,9 +13,17 @@ export default {
   name: 'PlayConnectionContainer',
 
   computed: {
-    ...mapGetters(['player']),
+    ...mapGetters(['isConnected', 'player']),
     table() {
       return this.$route.query.table;
+    },
+  },
+
+  watch: {
+    isConnected(newValue) {
+      if (newValue) {
+        this.joinTable(this.table);
+      }
     },
   },
 
@@ -25,7 +33,7 @@ export default {
 
   created() {
     Vue.use(VueNativeSock, `ws://localhost:8090/ws/${this.player}`, { store });
-    this.joinTable(this.table);
+    // this.joinTable(this.table);
   },
 
 };

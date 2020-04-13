@@ -61,8 +61,8 @@ export default {
   computed: {
     classObject() {
       return {
-        'card-font-red': ['heart', 'diamond'].includes(this.card.suit),
-        'card-font-black': ['spade', 'club'].includes(this.card.suit),
+        'red--text': ['heart', 'diamond'].includes(this.card.suit),
+        'black--text': ['spade', 'club'].includes(this.card.suit),
         'card-selected': this.isSelected,
       };
     },
@@ -99,12 +99,5 @@ export default {
     background-color: transparent;
     border: none !important;
     font-size: xx-large !important;
-  }
-
-  .card-font-red {
-    color: red;
-  }
-  .card-font-black {
-    color: black;
   }
 </style>

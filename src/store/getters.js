@@ -3,6 +3,9 @@ import groupBy from 'lodash/groupBy';
 const sortCards = (cardOne, cardTwo) => cardOne.value - cardTwo.value;
 
 export default {
+  isConnected({ isConnected }) {
+    return isConnected;
+  },
   player({ player }) {
     return player;
   },

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+// import Vue from 'vue';
 
 import mutationTypes from './mutationsTypes';
 
@@ -15,11 +15,8 @@ export default {
   [mutationTypes.RECEIVE_CARDS](state, newCards) {
     state.playerCards = state.playerCards.concat(newCards); // eslint-disable-line
   },
-  SOCKET_ONOPEN(state, event) {
-    console.log('SOCKET_ONOPEN');
-    console.log(event);
-    Vue.prototype.$socket = event.currentTarget;
-    // state.socket.isConnected = true;
+  SOCKET_ONOPEN(state) {
+    state.isConnected = true;
   },
   SOCKET_ONCLOSE(state) {
     state.socket.isConnected = false;

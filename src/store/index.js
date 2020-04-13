@@ -11,6 +11,7 @@ export default new Vuex.Store({
   state: {
     orderedSuits: ['payoo', 'heart', 'diamond', 'spade', 'club'],
     player: 'player0',
+    isConnected: false,
     gameState: {
       turnNumber: 1,
       status: 'give_card',
