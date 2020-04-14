@@ -36,7 +36,7 @@ export default {
   },
 
   created() {
-    Vue.use(VueNativeSock, `ws://localhost:8090/ws/${this.player}`, { store });
+    Vue.use(VueNativeSock, `ws://localhost:8090/ws/${this.player.name}`, { store });
     // this.joinTable(this.table);
   },
 

@@ -2,9 +2,20 @@ import groupBy from 'lodash/groupBy';
 
 import mutationTypes from './mutationsTypes';
 
+const savePlayer = (state, newPlayer) => { state.player = newPlayer; };
+const saveOtherPlayers = (state, newOtherPlayers) => { state.otherPlayers = newOtherPlayers; };
+const toLowerCase = (cards) => cards.map(({ id, suit, value }) => {
+  const cardToLowerCase = {
+    id: id.toLowerCase(),
+    suit: suit.toLowerCase(),
+    value,
+  };
+  return cardToLowerCase;
+});
+
 export default {
   [mutationTypes.SAVE_PLAYER](state, newPlayer) {
-    state.player = newPlayer; // eslint-disable-line
+    savePlayer(state, newPlayer);
   },
   [mutationTypes.SAVE_GAME_STATE](state, newGameState) {
     state.gameState = newGameState; // eslint-disable-line
@@ -26,12 +37,17 @@ export default {
   },
   // default handler called for all methods
   SOCKET_ONMESSAGE(state, message) {
-    const { gameInfo } = JSON.parse(message.data);
-    console.log(gameInfo);
-    console.log(Object.keys(gameInfo));
-    const groupPlayers = groupBy(gameInfo.players, (p) => p.name === state.player);
-    console.log(groupPlayers);
-    state.otherPlayers = groupPlayers.false;
+    const { gameInfo, playerCards } = JSON.parse(message.data);
+    const playerName = state.player.name;
+    const groupPlayers = groupBy(gameInfo.players, (p) => p.name === playerName);
+
+    const player = {
+      ...groupPlayers.true[0],
+      cards: playerCards && toLowerCase(playerCards),
+    };
+    savePlayer(state, player);
+    saveOtherPlayers(state, groupPlayers.false);
+    state.gameState.status = gameInfo.state;
   },
   // mutations for reconnect methods
   SOCKET_RECONNECT(state, count) {

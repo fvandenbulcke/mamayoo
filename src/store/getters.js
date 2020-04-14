@@ -10,9 +10,9 @@ export default {
     return player;
   },
 
-  sortedPlayerCards({ orderedSuits, playerCards }) {
+  sortedPlayerCards({ orderedSuits, player }) {
     const sortedCards = [];
-    const groupedCards = groupBy(playerCards, 'suit');
+    const groupedCards = groupBy(player.cards, 'suit');
     orderedSuits.forEach((suit) => {
       if (groupedCards[suit]) {
         sortedCards.push(...groupedCards[suit].sort(sortCards));

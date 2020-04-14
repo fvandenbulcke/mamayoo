@@ -53,7 +53,7 @@ export default {
         diamond: '♦',
         spade: '♠',
         club: '♣',
-        payoo: 'P',
+        mayoo: 'M',
       },
     };
   },

@@ -9,8 +9,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    orderedSuits: ['payoo', 'heart', 'diamond', 'spade', 'club'],
-    player: 'player0',
+    orderedSuits: ['mayoo', 'heart', 'diamond', 'spade', 'club'],
+    player: null,
     isConnected: false,
     gameState: {
       turnNumber: 1,
@@ -25,6 +25,7 @@ export default new Vuex.Store({
       player6: { points: 60, status: 'toPlay' },
       player7: { points: 70, status: 'toPlay' }, */
     },
+    playerCards: null,
     playerCardsInit: [
       { suit: 'heart', value: '7' },
       { suit: 'diamond', value: '10' },

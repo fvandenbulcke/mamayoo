@@ -6,18 +6,21 @@ import mutationTypes from './mutationsTypes';
 
 export default {
   savePlayer({ commit }, player) {
-    return commit(mutationTypes.SAVE_PLAYER, player);
+    return commit(mutationTypes.SAVE_PLAYER, { name: player });
   },
   createTable({ dispatch }) {
     return mamayooService.createTable()
       .then((response) => dispatch('joinTable', response.createdTable));
   },
   joinTable(tableId) {
-    console.log(this.$socket);
-    Vue.prototype.$socket.sendObj({
-      value: tableId,
-      action: 'GAME_JOIN',
-    });
+    Vue.prototype.$socket.send(
+      JSON.stringify({ action: 'GAME_JOIN', value: tableId }),
+    );
+  },
+  startGame() {
+    Vue.prototype.$socket.send(
+      JSON.stringify({ action: 'GAME_START' }),
+    );
   },
   giveCardsToNeighbour({ getters, commit }, cardIds) {
     const cards = groupBy(getters.playerCards, (card) => cardIds.includes(card.id));
