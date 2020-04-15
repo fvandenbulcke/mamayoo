@@ -23,7 +23,7 @@
 import BackCard from '@/components/cards/BackCard';
 
 export default {
-  name: 'OtherPlayer',
+  name: 'PlayerStatus',
   components: {
     BackCard,
   },

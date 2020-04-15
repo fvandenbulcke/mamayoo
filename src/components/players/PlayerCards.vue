@@ -3,11 +3,11 @@
     <div class="d-flex d-inline-flex justify-center">
       <mamayoo-card
         v-for="card in gameCards"
-        :key="card.card.id"
-        :card="card.card"
+        :key="card.id"
+        :card="card"
         :is-selected="card.isSelected"
         :is-disable="!card.isSelectable"
-        :on-click="() => onCardClick(card.card.id)"
+        :on-click="() => onCardClick(card.id)"
       />
     </div>
   </div>

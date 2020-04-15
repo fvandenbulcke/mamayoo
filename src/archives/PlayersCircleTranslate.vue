@@ -24,7 +24,7 @@
         <v-col
           class="d-flex justify-center"
         >
-          <OtherPlayer/>
+          <PlayerStatus/>
         </v-col>
       </v-row>
 
@@ -47,13 +47,13 @@
 
 <script>
 import PlayerCards from '@/components/players/PlayerCards';
-import OtherPlayer from '@/components/players/OtherPlayer';
+import PlayerStatus from '@/components/players/PlayerStatus';
 import Player from '@/archives/Player';
 
 export default {
   components: {
     PlayerCards,
-    OtherPlayer,
+    PlayerStatus,
     Player,
   },
 

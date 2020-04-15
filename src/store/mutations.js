@@ -38,8 +38,10 @@ export default {
   // default handler called for all methods
   SOCKET_ONMESSAGE(state, message) {
     const { gameInfo, playerCards } = JSON.parse(message.data);
+    const { howManyCardsToDonate, players } = gameInfo;
+
     const playerName = state.player.name;
-    const groupPlayers = groupBy(gameInfo.players, (p) => p.name === playerName);
+    const groupPlayers = groupBy(players, (p) => p.name === playerName);
 
     const player = {
       ...groupPlayers.true[0],
@@ -47,7 +49,10 @@ export default {
     };
     savePlayer(state, player);
     saveOtherPlayers(state, groupPlayers.false);
-    state.gameState.status = gameInfo.state;
+    state.gameState = {
+      status: gameInfo.state,
+      maxCardToSelect: howManyCardsToDonate,
+    };
   },
   // mutations for reconnect methods
   SOCKET_RECONNECT(state, count) {

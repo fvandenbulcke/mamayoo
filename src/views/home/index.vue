@@ -12,7 +12,9 @@
             offset-md="1"
             class="d-flex justify-center"
           >
-            <CreateTableButton
+            <MayooActionButton
+              label="Create table"
+              :is-disabled="false"
               :on-click="createNewTable"
             />
           </v-col>
@@ -37,7 +39,7 @@
 import { mapActions } from 'vuex';
 
 import mamayooService from '@/services/mamayooService';
-import CreateTableButton from './CreateTableButton';
+import MayooActionButton from '@/components/buttons/MayooActionButton';
 import MamayooTableLine from './MamayooTableLine';
 
 
@@ -45,8 +47,8 @@ export default {
   name: 'Home',
 
   components: {
-    CreateTableButton,
     MamayooTableLine,
+    MayooActionButton,
   },
 
   data() {

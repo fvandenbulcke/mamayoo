@@ -22,7 +22,7 @@
         <v-col
           class="d-flex justify-center"
         >
-          <OtherPlayer/>
+          <PlayerStatus/>
         </v-col>
       </v-row>
 
@@ -35,14 +35,14 @@
           offset-md="2"
           class="d-flex justify-center"
         >
-          <OtherPlayer/>
+          <PlayerStatus/>
         </v-col>
         <v-col
           md="2"
           offset-md="4"
           class="d-flex justify-center"
         >
-          <OtherPlayer/>
+          <PlayerStatus/>
         </v-col>
       </v-row>
       <v-row
@@ -54,14 +54,14 @@
           offset-md="1"
           class="d-flex justify-center"
         >
-          <OtherPlayer/>
+          <PlayerStatus/>
         </v-col>
         <v-col
           md="2"
           offset-md="6"
           class="d-flex justify-center"
         >
-          <OtherPlayer/>
+          <PlayerStatus/>
         </v-col>
       </v-row>
       <v-row
@@ -73,14 +73,14 @@
           offset-md="2"
           class="d-flex justify-center"
         >
-          <OtherPlayer/>
+          <PlayerStatus/>
         </v-col>
         <v-col
           md="2"
           offset-md="4"
           class="d-flex justify-center"
         >
-          <OtherPlayer/>
+          <PlayerStatus/>
         </v-col>
       </v-row>
 
@@ -103,13 +103,13 @@
 
 <script>
 import PlayerCards from '@/components/players/PlayerCards';
-import OtherPlayer from '@/components/players/OtherPlayer';
+import PlayerStatus from '@/components/players/PlayerStatus';
 import Player from '@/archives/Player';
 
 export default {
   components: {
     PlayerCards,
-    OtherPlayer,
+    PlayerStatus,
     Player,
   },
 

@@ -13,7 +13,7 @@
       <v-col
         class="d-flex justify-center"
       >
-        <OtherPlayer
+        <PlayerStatus
           v-for="otherPlayer in otherPlayers"
           :key="otherPlayer.name"
           :player="otherPlayer"
@@ -29,24 +29,24 @@
       <v-col
         class="d-flex justify-center"
       >
-      <template v-if="gameStatus === 'WaitingPlayerState'">
-        <StartGameButton
-          :is-disable="false"
-        />
-      </template>
-      <template v-else-if="gameStatus === 'WaitingCardDonationState'">
-        <v-btn
-          large color="primary"
-          :disabled="!actionIsAvaillable"
-          @click="giveSelectedCards"
-        >
-          sendCards
-        </v-btn>
-      </template>
-      <template v-else-if="gameStatus === 'roll_dice'">
-        <DiceRolling/>
-        <Dice/>
-      </template>
+        <template v-if="gameStatus === 'WaitingPlayerState'">
+          <MayooActionButton
+            label="START GAME"
+            :is-disabled="false"
+            :on-click="startGame"
+          />
+        </template>
+        <template v-else-if="gameStatus === 'WaitingCardDonationState'">
+          <MayooActionButton
+            label="send cards"
+            :is-disabled="!actionIsAvaillable"
+            :on-click="giveSelectedCards"
+          />
+        </template>
+        <template v-else-if="gameStatus === 'roll_dice'">
+          <DiceRolling/>
+          <Dice/>
+        </template>
       </v-col>
     </v-row>
 
@@ -59,7 +59,7 @@
       <v-col
         class="d-flex justify-center"
       >
-        <OtherPlayer
+        <PlayerStatus
           :player="player"
         />
         <PlayerCards
@@ -75,20 +75,20 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import OtherPlayer from '@/components/players/OtherPlayer';
+import PlayerStatus from '@/components/players/PlayerStatus';
 import PlayerCards from '@/components/players/PlayerCards';
 import DiceRolling from '@/components/dices/DiceRolling';
-import StartGameButton from '@/components/buttons/StartGameButton';
+import MayooActionButton from '@/components/buttons/MayooActionButton';
 import Dice from '@/components/dices/Dice';
 
 export default {
   name: 'PlayGround',
   components: {
     PlayerCards,
-    OtherPlayer,
+    PlayerStatus,
     DiceRolling,
     Dice,
-    StartGameButton,
+    MayooActionButton,
   },
 
   data() {
@@ -98,7 +98,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['giveCardsToNeighbour']),
+    ...mapActions(['startGame', 'giveCardsToNeighbour']),
 
     changeCardSelect(cardId) {
       const cardIdsWithoutSelected = this.selectedCardIds.filter((c) => c !== cardId);
@@ -130,7 +130,7 @@ export default {
         const isSelectable = isSelected
           || this.selectedCardIds.length < this.gameState.maxCardToSelect;
         return {
-          card: c,
+          ...c,
           isSelected,
           isSelectable,
         };
