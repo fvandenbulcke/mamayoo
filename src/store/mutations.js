@@ -3,7 +3,9 @@ import groupBy from 'lodash/groupBy';
 import mutationTypes from './mutationsTypes';
 
 const savePlayer = (state, newPlayer) => { state.player = newPlayer; };
-const saveOtherPlayers = (state, newOtherPlayers) => { state.otherPlayers = newOtherPlayers; };
+const saveOtherPlayers = (state, newOtherPlayers) => {
+  state.otherPlayers = newOtherPlayers || [];
+};
 const toLowerCase = (cards) => cards.map(({ id, suit, value }) => {
   const cardToLowerCase = {
     id: id.toLowerCase(),

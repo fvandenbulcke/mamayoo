@@ -5,13 +5,6 @@
         <v-col cols="auto">
           Table {{table.id}}
         </v-col>
-        <v-col cols="auto">
-          <v-text-field
-            placeholder="Enter your pseudo"
-            v-model="pseudo"
-          >
-          </v-text-field>
-        </v-col>
         <v-col
           cols="auto"
           class="text-center pl-0"
@@ -22,7 +15,7 @@
             <v-col>
               <v-btn
                 large color="primary"
-                :disabled="!pseudo"
+                :disabled="isDisabled"
                 @click="joinTable"
               >
                 Join Table
@@ -49,17 +42,15 @@ export default {
       type: Function,
       required: true,
     },
-  },
-
-  data() {
-    return {
-      pseudo: null,
-    };
+    isDisabled: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   methods: {
     joinTable() {
-      this.onClick({ table: this.table.id, pseudo: this.pseudo });
+      this.onClick({ table: this.table.id });
     },
   },
 };
