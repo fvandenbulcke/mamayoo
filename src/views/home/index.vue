@@ -2,10 +2,29 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12">
+        <v-row>
+          <v-img src="static/mamayoo.png"></v-img>
+        </v-row>
         <v-row
           align="end"
           justify="center"
-          style="height: 500px;"
+          style="height: 300px;"
+        >
+          <v-col
+            md="2"
+            offset-md="1"
+            class="d-flex justify-center"
+          >
+            <v-text-field
+              placeholder="Enter your pseudo"
+              v-model="pseudo"
+            >
+            </v-text-field>
+          </v-col>
+        </v-row>
+        <v-row
+          justify="center"
+          style="min-height: 250px;"
         >
           <v-col
             md="2"
@@ -14,19 +33,28 @@
           >
             <CreateTableButton
               :on-click="createNewTable"
+              :is-disabled="!pseudo"
             />
           </v-col>
-        </v-row>
-        <v-row
-          justify="center"
-          class="d-flex"
-        >
-          <mamayoo-table-line
-            v-for="table in tables"
-            :key="table.id"
-            :table="table"
-            :on-click="selectTable"
-          />
+          <v-col
+            md="4"
+            offset-md="1"
+            class="d-flex justify-center"
+          >
+            <v-layout wrap>
+              <v-col
+                md="6"
+                class="d-flex"
+                v-for="table in tables"
+                :key="table.id">
+                <mamayoo-table-line
+                  :table="table"
+                  :on-click="selectTable"
+                  :is-disabled="!pseudo"
+                />
+              </v-col>
+            </v-layout>
+          </v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -52,18 +80,20 @@ export default {
   data() {
     return {
       tables: null,
+      pseudo: null,
     };
   },
 
   methods: {
     ...mapActions(['createTable', 'savePlayer']),
     createNewTable() {
-      mamayooService.createTable()
+      this.savePlayer(this.pseudo)
+        .then(() => mamayooService.createTable())
         .then((table) => this.goToPlayView(table));
     },
 
-    selectTable({ table, pseudo }) {
-      this.savePlayer(pseudo)
+    selectTable({ table }) {
+      this.savePlayer(this.pseudo)
         .then(() => this.goToPlayView(table));
     },
 

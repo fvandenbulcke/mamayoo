@@ -11,6 +11,7 @@
         <v-btn
           class="button"
           @click="onClick"
+          :disabled="isDisabled"
         >
           CREATE
         </v-btn>
@@ -26,6 +27,10 @@ export default {
   props: {
     onClick: {
       type: Function,
+      required: true,
+    },
+    isDisabled: {
+      type: Boolean,
       required: true,
     },
   },
