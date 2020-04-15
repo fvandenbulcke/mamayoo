@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import groupBy from 'lodash/groupBy';
 
 import mamayooService from '@/services/mamayooService';
 import mutationTypes from './mutationsTypes';
@@ -22,18 +21,10 @@ export default {
       JSON.stringify({ action: 'GAME_START' }),
     );
   },
-  giveCardsToNeighbour({ getters, commit }, cardIds) {
-    const cards = groupBy(getters.playerCards, (card) => cardIds.includes(card.id));
-    commit(mutationTypes.SAVE_PLAYER_CARDS, cards.false);
-    return mamayooService.giveCardsToNeighbour(cards.true)
-      .then((newState) => {
-        commit(mutationTypes.SAVE_GAME_STATE, newState);
-        // only for dev without backend
-        const givenCards = [
-          { suit: 'payoo', value: '20' },
-          { suit: 'payoo', value: '19' },
-        ];
-        commit(mutationTypes.RECEIVE_CARDS, givenCards);
-      });
+  giveCardsToNeighbour(store, cardIds) {
+    const cardIdsUpperCase = cardIds.map((c) => c.toUpperCase());
+    Vue.prototype.$socket.send(
+      JSON.stringify({ action: 'GIVE_CARD', value: JSON.stringify(cardIdsUpperCase) }),
+    );
   },
 };

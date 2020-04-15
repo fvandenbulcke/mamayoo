@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     haveToPlay() {
-      return this.player.status === 'playing';
+      return this.player.state === 'IS_PLAYING';
     },
   },
 };

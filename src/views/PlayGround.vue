@@ -43,7 +43,7 @@
             :on-click="giveSelectedCards"
           />
         </template>
-        <template v-else-if="gameStatus === 'roll_dice'">
+        <template v-else-if="gameStatus === 'PlayingState'">
           <DiceRolling/>
           <Dice/>
         </template>
