@@ -11,8 +11,8 @@
       >
         <li
           class="die-item"
-          v-for="(face, index) in faces"
-          :key="`face-${index}`"
+          v-for="face in faces"
+          :key="`face-${face.symbol}`"
           :data-side="face.symbol"
         >
           <span
