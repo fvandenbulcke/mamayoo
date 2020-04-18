@@ -10,12 +10,17 @@
       :data-roll="roll" id="die-1"
       >
         <li
-          v-for="side in sides"
-          :key="`side-${side}`"
           class="die-item"
-          :data-side="side"
+          v-for="face in faces"
+          :key="`face-${face.symbol}`"
+          :data-side="face.symbol"
         >
-          <span v-for="d in side" :key="`dot-${d}`" class="dot"></span>
+          <span
+            class="die-face"
+            :class="{'red--text': face.isRedSuit}"
+          >
+            {{ face.value }}
+          </span>
         </li>
       </ol>
     </div>
@@ -42,7 +47,15 @@ export default {
 
   data() {
     return {
-      sides: 8,
+      sides: 6,
+      faces: [
+        { symbol: 'CLUB', value: '♣' },
+        { symbol: 'DIAMOND', value: '♦', isRedSuit: true },
+        { symbol: 'SPADE', value: '♠' },
+        { symbol: 'HEART', value: '♥', isRedSuit: true },
+        { symbol: 'FAKE', value: '♣' },
+        { symbol: 'FAKE2', value: '♦', isRedSuit: true },
+      ],
       dataRoll: 1,
       roll: 1,
       oddRoll: false,
@@ -54,18 +67,7 @@ export default {
     rollDice() {
       this.oddRoll = !this.oddRoll;
       this.evenRoll = !this.evenRoll;
-      this.roll = 3;// this.getRandomNumber(1, 8);
-    },
-
-    toggleClasses(die) {
-      die.classList.toggle('odd-roll');
-      die.classList.toggle('even-roll');
-    },
-
-    getRandomNumber(min, max) {
-      const min2 = Math.ceil(min);
-      const max2 = Math.floor(max);
-      return Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
+      this.roll = 'HEART';
     },
   },
 };
@@ -118,140 +120,70 @@ export default {
     box-shadow: inset -0.35rem 0.35rem 0.75rem rgba(0, 0, 0, 0.3),
       inset 0.5rem -0.25rem 0.5rem rgba(0, 0, 0, 0.15);
     display: grid;
-    grid-template-areas: "one two three" "four five six" "seven eight nine";
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "one";
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     height: 100%;
-    padding: 1rem;
     position: absolute;
     width: 100%;
   }
-  .dot {
-    align-self: center;
-    background-color: #676767;
-    border-radius: 50%;
-    box-shadow: inset -0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.5);
-    display: block;
-    height: 1.25rem;
+  .die-face {
     justify-self: center;
-    width: 1.25rem;
+    font-size: 4em;
   }
-  .even-roll[data-roll="1"] {
+  .even-roll[data-roll="CLUB"] {
     transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg);
   }
-  .even-roll[data-roll="2"] {
+  .even-roll[data-roll="DIAMOND"] {
     transform: rotateX(450deg) rotateY(720deg) rotateZ(360deg);
   }
-  .even-roll[data-roll="3"] {
+  .even-roll[data-roll="SPADE"] {
     transform: rotateX(360deg) rotateY(630deg) rotateZ(360deg);
   }
-  .even-roll[data-roll="4"] {
+  .even-roll[data-roll="HEART"] {
     transform: rotateX(360deg) rotateY(810deg) rotateZ(360deg);
   }
-  .even-roll[data-roll="5"] {
+  .even-roll[data-roll="FAKE"] {
     transform: rotateX(270deg) rotateY(720deg) rotateZ(360deg);
   }
-  .even-roll[data-roll="6"] {
+  .even-roll[data-roll="FAKE2"] {
     transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg);
   }
-  .odd-roll[data-roll="1"] {
+  .odd-roll[data-roll="CLUB"] {
     transform: rotateX(-360deg) rotateY(-720deg) rotateZ(-360deg);
   }
-  .odd-roll[data-roll="2"] {
+  .odd-roll[data-roll="DIAMOND"] {
     transform: rotateX(-270deg) rotateY(-720deg) rotateZ(-360deg);
   }
-  .odd-roll[data-roll="3"] {
+  .odd-roll[data-roll="SPADE"] {
     transform: rotateX(-360deg) rotateY(-810deg) rotateZ(-360deg);
   }
-  .odd-roll[data-roll="4"] {
+  .odd-roll[data-roll="HEART"] {
     transform: rotateX(-360deg) rotateY(-630deg) rotateZ(-360deg);
   }
-  .odd-roll[data-roll="5"] {
+  .odd-roll[data-roll="FAKE"] {
     transform: rotateX(-450deg) rotateY(-720deg) rotateZ(-360deg);
   }
-  .odd-roll[data-roll="6"] {
+  .odd-roll[data-roll="FAKE2"] {
     transform: rotateX(-360deg) rotateY(-900deg) rotateZ(-360deg);
   }
-  [data-side="1"] {
+  [data-side="CLUB"] {
     transform: rotate3d(0, 0, 0, 90deg) translateZ(3rem);
   }
-  [data-side="2"] {
+  [data-side="DIAMOND"] {
     transform: rotate3d(-1, 0, 0, 90deg) translateZ(3rem);
   }
-  [data-side="3"] {
+  [data-side="SPADE"] {
     transform: rotate3d(0, 1, 0, 90deg) translateZ(3rem);
   }
-  [data-side="4"] {
+  [data-side="HEART"] {
     transform: rotate3d(0, -1, 0, 90deg) translateZ(3rem);
   }
-  [data-side="5"] {
+  [data-side="FAKE"] {
     transform: rotate3d(1, 0, 0, 90deg) translateZ(3rem);
   }
-  [data-side="6"] {
+  [data-side="FAKE2"] {
     transform: rotate3d(1, 0, 0, 180deg) translateZ(3rem);
-  }
-  [data-side="1"] .dot:nth-of-type(1) {
-    grid-area: five;
-  }
-  [data-side="2"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="2"] .dot:nth-of-type(2) {
-    grid-area: nine;
-  }
-  [data-side="3"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="3"] .dot:nth-of-type(2) {
-    grid-area: five;
-  }
-  [data-side="3"] .dot:nth-of-type(3) {
-    grid-area: nine;
-  }
-  [data-side="4"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="4"] .dot:nth-of-type(2) {
-    grid-area: three;
-  }
-  [data-side="4"] .dot:nth-of-type(3) {
-    grid-area: seven;
-  }
-  [data-side="4"] .dot:nth-of-type(4) {
-    grid-area: nine;
-  }
-  [data-side="5"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="5"] .dot:nth-of-type(2) {
-    grid-area: three;
-  }
-  [data-side="5"] .dot:nth-of-type(3) {
-    grid-area: five;
-  }
-  [data-side="5"] .dot:nth-of-type(4) {
-    grid-area: seven;
-  }
-  [data-side="5"] .dot:nth-of-type(5) {
-    grid-area: nine;
-  }
-  [data-side="6"] .dot:nth-of-type(1) {
-    grid-area: one;
-  }
-  [data-side="6"] .dot:nth-of-type(2) {
-    grid-area: three;
-  }
-  [data-side="6"] .dot:nth-of-type(3) {
-    grid-area: four;
-  }
-  [data-side="6"] .dot:nth-of-type(4) {
-    grid-area: six;
-  }
-  [data-side="6"] .dot:nth-of-type(5) {
-    grid-area: seven;
-  }
-  [data-side="6"] .dot:nth-of-type(6) {
-    grid-area: nine;
   }
 
   button {
