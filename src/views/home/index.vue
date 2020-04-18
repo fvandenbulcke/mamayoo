@@ -38,6 +38,7 @@
             />
           </v-col>
           <v-col
+            v-if="tables.length > 0"
             md="4"
             offset-md="1"
             class="d-flex justify-center"
