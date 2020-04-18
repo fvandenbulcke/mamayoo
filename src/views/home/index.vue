@@ -11,7 +11,6 @@
         >
           <v-col
             md="2"
-            offset-md="1"
             class="d-flex justify-center"
           >
             <v-text-field
@@ -38,7 +37,7 @@
             />
           </v-col>
           <v-col
-            v-if="tables.length > 0"
+            v-if="tables"
             md="4"
             offset-md="1"
             class="d-flex justify-center"
@@ -106,7 +105,11 @@ export default {
 
   created() {
     mamayooService.getTableList()
-      .then((response) => { this.tables = response; });
+      .then((response) => {
+        if (response && response.length > 0) {
+          this.tables = response;
+        }
+      });
   },
 
 };
