@@ -1,25 +1,32 @@
 <template>
-  <v-container
-    class="lighten-5 pa-0 mam-container"
-    :class="classObject"
+  <v-card
+    outlined
+    tile
+    :ripple="false"
+    :class="{
+      'card-selected': this.isSelected,
+    }"
     @click="select"
   >
-    <v-row
-      no-gutters
-      style="height: 150px;"
-    >
-      <v-col align-self="start" class="pl-2">
-        <span class="d-inline-flex mam-card">{{ suitIcons[card.suit] }}</span>
-        <!-- <v-icon>home</v-icon> -->
-      </v-col>
-      <v-col align-self="center">
-        <span class="d-inline-flex mam-card">{{ card.value }}</span>
-      </v-col>
-      <v-col align-self="end" class="pr-2">
-        <span class="d-inline-flex mam-card">{{ suitIcons[card.suit] }}</span>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-card-text class="pa-0" :class="cardContentClasses">
+      <v-container
+        fill-height
+        fluid
+        class="pt-0 pb-0 headline"
+        style="height: 150px;width: 70px;"
+      >
+        <v-row no-gutters class="justify-start">
+          <span>{{ suitIcons[card.suit] }}</span>
+        </v-row>
+        <v-row no-gutters class="justify-center">
+          <span>{{ card.value }}</span>
+        </v-row>
+        <v-row no-gutters class="justify-end">
+          <span>{{ suitIcons[card.suit] }}</span>
+        </v-row>
+      </v-container>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -59,11 +66,10 @@ export default {
   },
 
   computed: {
-    classObject() {
+    cardContentClasses() {
       return {
         'red--text': ['heart', 'diamond'].includes(this.card.suit),
         'black--text': ['spade', 'club'].includes(this.card.suit),
-        'card-selected': this.isSelected,
       };
     },
   },
@@ -88,16 +94,16 @@ export default {
   }
 
   .card-selected {
-    border-color: blue;
-  }
-
-  .mam-container:hover {
-    cursor: pointer;
+    border-color: blue !important;
   }
 
   .mam-card {
     background-color: transparent;
     border: none !important;
     font-size: xx-large !important;
+  }
+  .v-card{
+    background-color: transparent;
+    border-radius: 10px;
   }
 </style>

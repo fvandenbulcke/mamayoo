@@ -1,15 +1,13 @@
 <template>
-  <div class="playerCards">
-    <div class="d-flex d-inline-flex justify-center">
-      <mamayoo-card
-        v-for="card in gameCards"
-        :key="card.id"
-        :card="card"
-        :is-selected="card.isSelected"
-        :is-disable="!card.isSelectable"
-        :on-click="() => onCardClick(card.id)"
-      />
-    </div>
+  <div class="d-flex flex-wrap">
+    <mamayoo-card
+      v-for="card in gameCards"
+      :key="card.id"
+      :card="card"
+      :is-selected="card.isSelected"
+      :is-disable="!card.isSelectable"
+      :on-click="() => onCardClick(card.id)"
+    />
   </div>
 </template>
 

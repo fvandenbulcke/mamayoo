@@ -52,22 +52,16 @@
 
     <v-row
       align="end"
-      no-gutters
-      class="mt-auto mb-6"
-      style="height: 150px;"
+      class="mt-auto mb-6 justify-center"
     >
-      <v-col
-        class="d-flex justify-center"
-      >
-        <PlayerStatus
-          :player="player"
-        />
-        <PlayerCards
-          class="pa-2"
-          :game-cards="gameCards"
-          :on-card-click="changeCardSelect"
-        />
-      </v-col>
+      <PlayerStatus
+        :player="player"
+      />
+      <PlayerCards
+        class="pa-2"
+        :game-cards="gameCards"
+        :on-card-click="changeCardSelect"
+      />
     </v-row>
   </v-container>
 </template>
