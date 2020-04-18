@@ -54,6 +54,7 @@ export default {
     state.gameState = {
       status: gameInfo.state,
       maxCardToSelect: howManyCardsToDonate,
+      mamayooDice: gameInfo.mamayooDice,
     };
   },
   // mutations for reconnect methods

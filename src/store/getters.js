@@ -48,4 +48,8 @@ export default {
   gameStatus({ gameState }) {
     return gameState.status;
   },
+
+  mamayooDice({ gameState }) {
+    return gameState.mamayooDice;
+  },
 };

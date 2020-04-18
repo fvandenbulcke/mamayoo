@@ -24,12 +24,6 @@
         </li>
       </ol>
     </div>
-    <v-btn
-      large color="primary"
-      @click="rollDice"
-    >
-      ROLL THE DICE
-    </v-btn>
   </div>
 </template>
 
@@ -38,10 +32,9 @@
 export default {
   name: 'Dice',
   props: {
-    value: {
-      type: Number,
-      required: false,
-      default: 0,
+    mamayooDice: {
+      type: String,
+      required: true,
     },
   },
 
@@ -57,18 +50,10 @@ export default {
         { symbol: 'FAKE2', value: '♦', isRedSuit: true },
       ],
       dataRoll: 1,
-      roll: 1,
+      roll: this.mamayooDice,
       oddRoll: false,
       evenRoll: true,
     };
-  },
-
-  methods: {
-    rollDice() {
-      this.oddRoll = !this.oddRoll;
-      this.evenRoll = !this.evenRoll;
-      this.roll = 'HEART';
-    },
   },
 };
 </script>

@@ -44,8 +44,9 @@
           />
         </template>
         <template v-else-if="gameStatus === 'PlayingState'">
-          <DiceRolling/>
-          <Dice/>
+          <Dice
+            :mamayooDice="mamayooDice"
+          />
         </template>
       </v-col>
     </v-row>
@@ -71,7 +72,6 @@ import { mapGetters, mapActions } from 'vuex';
 
 import PlayerStatus from '@/components/players/PlayerStatus';
 import PlayerCards from '@/components/players/PlayerCards';
-import DiceRolling from '@/components/dices/DiceRolling';
 import MayooActionButton from '@/components/buttons/MayooActionButton';
 import Dice from '@/components/dices/Dice';
 
@@ -80,7 +80,6 @@ export default {
   components: {
     PlayerCards,
     PlayerStatus,
-    DiceRolling,
     Dice,
     MayooActionButton,
   },
@@ -112,7 +111,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['gameState', 'playerCards', 'otherPlayers', 'gameStatus', 'player']),
+    ...mapGetters(['gameState', 'playerCards', 'otherPlayers', 'gameStatus', 'player', 'mamayooDice']),
 
     actionIsAvaillable() {
       return this.selectedCardIds.length >= this.gameState.maxCardToSelect;
