@@ -50,6 +50,14 @@ export default {
       cards: playerCards && toLowerCase(playerCards),
     };
     savePlayer(state, player);
+
+    if (groupPlayers.false && groupPlayers.false.length > 1
+      && groupPlayers.false.some((p) => p.order < groupPlayers.true[0].order)) {
+      while (groupPlayers.false.slice(-1).pop().order > groupPlayers.true[0].order) {
+        groupPlayers.false.unshift(groupPlayers.false.pop());
+      }
+    }
+
     saveOtherPlayers(state, groupPlayers.false);
     state.gameState = {
       status: gameInfo.state,
