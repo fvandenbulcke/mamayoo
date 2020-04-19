@@ -6,8 +6,13 @@ export default {
   isConnected({ isConnected }) {
     return isConnected;
   },
-  player({ player }) {
-    return player;
+  playerStatus({ player }) {
+    const { name, score, state } = player;
+    return {
+      name,
+      score,
+      isTurn: state === 'IS_PLAYING',
+    };
   },
 
   sortedPlayerCards({ orderedSuits, player }) {
@@ -31,13 +36,14 @@ export default {
     });
   },
 
-  otherPlayers({ gameState, otherPlayers }) {
+  otherPlayers({ otherPlayers }) {
     return otherPlayers.map((p) => {
-      const player = {
-        ...p,
-        ...gameState[p.id],
+      const { name, score, state } = p;
+      return {
+        name,
+        score,
+        isTurn: state === 'IS_PLAYING',
       };
-      return player;
     });
   },
 
@@ -47,6 +53,10 @@ export default {
 
   gameStatus({ gameState }) {
     return gameState.status;
+  },
+
+  maxCardToSelect({ gameState }) {
+    return gameState.maxCardToSelect;
   },
 
   mamayooDice({ gameState }) {

@@ -13,7 +13,7 @@ export default {
   name: 'PlayConnectionContainer',
 
   computed: {
-    ...mapGetters(['isConnected', 'player']),
+    ...mapGetters(['isConnected', 'playerStatus']),
     table() {
       return this.$route.query.table;
     },
@@ -36,7 +36,7 @@ export default {
   },
 
   created() {
-    Vue.use(VueNativeSock, `ws://localhost:8090/ws/${this.player.name}`, { store });
+    Vue.use(VueNativeSock, `ws://localhost:8090/ws/${this.playerStatus.name}`, { store });
     // this.joinTable(this.table);
   },
 

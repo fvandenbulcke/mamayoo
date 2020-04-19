@@ -56,7 +56,7 @@
       class="mt-auto mb-6 justify-center"
     >
       <PlayerStatus
-        :player="player"
+        :player="playerStatus"
       />
       <PlayerCards
         class="pa-2"
@@ -111,23 +111,31 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['gameState', 'playerCards', 'otherPlayers', 'gameStatus', 'player', 'mamayooDice']),
+    ...mapGetters(['playerStatus', 'playerCards', 'otherPlayers', 'gameStatus', 'maxCardToSelect', 'mamayooDice']),
 
     actionIsAvaillable() {
-      return this.selectedCardIds.length >= this.gameState.maxCardToSelect;
+      return this.selectedCardIds.length === this.maxCardToSelect;
     },
 
     gameCards() {
       return this.playerCards.map((c) => {
         const isSelected = this.selectedCardIds.includes(c.id);
-        const isSelectable = isSelected
-          || this.selectedCardIds.length < this.gameState.maxCardToSelect;
+        const isSelectable = this.playerStatus.isTurn
+          && (isSelected || this.selectedCardIds.length < this.maxCardToSelect);
         return {
           ...c,
           isSelected,
           isSelectable,
         };
       });
+    },
+
+    isSelectableDuringDonation() {
+      return '';
+    },
+
+    isSelectableDuringTurn() {
+      return '';
     },
   },
 };

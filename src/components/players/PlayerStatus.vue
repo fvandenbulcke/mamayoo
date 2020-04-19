@@ -14,7 +14,7 @@
       <BackCard
         :value="player.points"
       />
-      <v-btn v-if="haveToPlay" text small loading>Normal</v-btn>
+      <v-btn v-if="this.player.isTurn" text small loading>Normal</v-btn>
     </v-card-text>
   </v-card>
 </template>
@@ -31,11 +31,6 @@ export default {
     player: {
       type: Object,
       required: true,
-    },
-  },
-  computed: {
-    haveToPlay() {
-      return this.player.state === 'IS_PLAYING';
     },
   },
 };
