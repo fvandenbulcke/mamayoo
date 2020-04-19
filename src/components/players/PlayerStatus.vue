@@ -12,7 +12,7 @@
     </v-card-subtitle>
     <v-card-text>
       <BackCard
-        :value="player.points"
+        :value="player.score"
       />
       <v-btn v-if="this.player.isTurn" text small loading>Normal</v-btn>
     </v-card-text>

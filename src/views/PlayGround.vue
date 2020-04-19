@@ -47,6 +47,11 @@
           <Dice
             :mamayooDice="mamayooDice"
           />
+          <MayooActionButton
+            label="play card"
+            :is-disabled="!actionIsAvaillable"
+            :on-click="playSelectedCard"
+          />
         </template>
       </v-col>
     </v-row>
@@ -91,7 +96,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['startGame', 'giveCardsToNeighbour']),
+    ...mapActions(['startGame', 'giveCardsToNeighbour', 'playCard']),
 
     changeCardSelect(cardId) {
       const cardIdsWithoutSelected = this.selectedCardIds.filter((c) => c !== cardId);
@@ -106,6 +111,11 @@ export default {
 
     giveSelectedCards() {
       this.giveCardsToNeighbour(this.selectedCardIds)
+        .then(() => { this.selectedCardIds = []; });
+    },
+
+    playSelectedCard() {
+      this.playCard(this.selectedCardIds[0])
         .then(() => { this.selectedCardIds = []; });
     },
   },

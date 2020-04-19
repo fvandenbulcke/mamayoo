@@ -29,7 +29,6 @@ export default {
   playerCards(state, getters) {
     return getters.sortedPlayerCards.map((c) => {
       const cardWithId = {
-        id: `${c.suit}${c.value}`,
         ...c,
       };
       return cardWithId;

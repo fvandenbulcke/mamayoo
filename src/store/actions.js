@@ -11,7 +11,7 @@ export default {
     return mamayooService.createTable()
       .then((response) => dispatch('joinTable', response.createdTable));
   },
-  joinTable(tableId) {
+  joinTable(store, tableId) {
     Vue.prototype.$socket.send(
       JSON.stringify({ action: 'GAME_JOIN', value: tableId }),
     );
@@ -26,5 +26,12 @@ export default {
     Vue.prototype.$socket.send(
       JSON.stringify({ action: 'GIVE_CARD', value: JSON.stringify(cardIdsUpperCase) }),
     );
+    return Promise.resolve();
+  },
+  playCard(store, cardId) {
+    Vue.prototype.$socket.send(
+      JSON.stringify({ action: 'PLAY_CARD', value: cardId.toUpperCase() }),
+    );
+    return Promise.resolve();
   },
 };
