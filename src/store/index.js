@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import * as CONSTANTS from '@/utils/constants';
+
 import actions from './actions';
 import mutations from './mutations';
 import getters from './getters';
+
 
 Vue.use(Vuex);
 
@@ -12,7 +15,10 @@ export default new Vuex.Store({
     mamayooDice: {
       result: 'CLUB',
     },
-    orderedSuits: ['MAYOO', 'HEART', 'DIAMOND', 'SPADE', 'CLUB'],
+    orderedSuits: [
+      CONSTANTS.SUIT_MAYOO, CONSTANTS.SUIT_HEART,
+      CONSTANTS.SUIT_DIAMOND, CONSTANTS.SUIT_SPADE, CONSTANTS.SUIT_CLUB,
+    ],
     player: null,
     isConnected: false,
     gameState: {

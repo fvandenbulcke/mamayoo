@@ -8,11 +8,10 @@
       <v-container
         fill-height
         fluid
-        class="pt-0 pb-0"
+        class="pa-0"
       >
         <v-row no-gutters
           class="justify-center"
-          align="center"
         >
           <span>{{ value }}</span>
         </v-row>

@@ -1,19 +1,42 @@
 import groupBy from 'lodash/groupBy';
-
 import mutationTypes from './mutationsTypes';
 
-/* const toLowerCase = (cards) => cards.map(({ id, suit, value }) => {
-  const cardToLowerCase = {
+
+const updateCardAttributeFormat = (card) => {
+  const { id, suit, value } = card;
+  return {
     id: id.toLowerCase(),
     suit: suit.toLowerCase(),
     value,
   };
-  return cardToLowerCase;
-}); */
+};
 
-const savePlayer = (state, newPlayer) => { state.player = newPlayer; };
+const updateCardsAttributeFormat = (cards) => cards && cards.map(updateCardAttributeFormat);
+
+function savePlayer(state, { newPlayer, playerCards }) {
+  state.player = {
+    ...newPlayer,
+    playedCard: newPlayer.playedCard && updateCardAttributeFormat(newPlayer.playedCard),
+    cards: playerCards && updateCardsAttributeFormat(playerCards),
+  };
+}
+
+function saveGameState(state, { status, howManyCardsToDonate, mamayooDice }) {
+  state.gameState = {
+    status,
+    maxCardToSelect: howManyCardsToDonate,
+    mamayooDice,
+  };
+}
+
 const saveOtherPlayers = (state, newOtherPlayers) => {
-  state.otherPlayers = newOtherPlayers || [];
+  state.otherPlayers = newOtherPlayers.map((p) => {
+    const otherPlayer = {
+      ...p,
+      playedCard: p.playedCard && updateCardAttributeFormat(p.playedCard),
+    };
+    return otherPlayer;
+  });
 };
 
 export default {
@@ -23,9 +46,9 @@ export default {
     }; // eslint-disable-line
   },
   [mutationTypes.SAVE_PLAYER](state, newPlayer) {
-    savePlayer(state, newPlayer);
+    savePlayer(state, { newPlayer });
   },
-  [mutationTypes.SAVE_GAME_STATE](state, newGameState) {
+  /* [mutationTypes.SAVE_GAME_STATE](state, newGameState) {
     state.gameState = newGameState; // eslint-disable-line
   },
   [mutationTypes.SAVE_PLAYER_CARDS](state, newPlayersCards) {
@@ -33,7 +56,7 @@ export default {
   },
   [mutationTypes.RECEIVE_CARDS](state, newCards) {
     state.playerCards = state.playerCards.concat(newCards); // eslint-disable-line
-  },
+  }, */
   SOCKET_ONOPEN(state) {
     state.isConnected = true;
   },
@@ -46,30 +69,24 @@ export default {
   // default handler called for all methods
   SOCKET_ONMESSAGE(state, message) {
     const { gameInfo, playerCards } = JSON.parse(message.data);
-    const { howManyCardsToDonate, players } = gameInfo;
+    const { howManyCardsToDonate, players, mamayooDice } = gameInfo;
 
     const playerName = state.player.name;
     const groupPlayers = groupBy(players, (p) => p.name === playerName);
 
-    const player = {
-      ...groupPlayers.true[0],
-      cards: playerCards,
-    };
-    savePlayer(state, player);
+    const localPlayer = groupPlayers.true && groupPlayers.true[0];
+    savePlayer(state, { newPlayer: localPlayer, playerCards });
 
-    if (groupPlayers.false && groupPlayers.false.length > 1
-      && groupPlayers.false.some((p) => p.order < groupPlayers.true[0].order)) {
-      while (groupPlayers.false.slice(-1).pop().order > groupPlayers.true[0].order) {
-        groupPlayers.false.unshift(groupPlayers.false.pop());
+    const otherPlayers = groupPlayers.false || [];
+    if (otherPlayers.length > 1
+      && otherPlayers.some((p) => p.order < localPlayer.order)) {
+      while (otherPlayers.slice(-1).pop().order > localPlayer.order) {
+        otherPlayers.unshift(otherPlayers.pop());
       }
     }
+    saveOtherPlayers(state, otherPlayers);
 
-    saveOtherPlayers(state, groupPlayers.false);
-    state.gameState = {
-      status: gameInfo.state,
-      maxCardToSelect: howManyCardsToDonate,
-      mamayooDice: gameInfo.mamayooDice,
-    };
+    saveGameState(state, { status: gameInfo.state, howManyCardsToDonate, mamayooDice });
   },
   // mutations for reconnect methods
   SOCKET_RECONNECT(state, count) {

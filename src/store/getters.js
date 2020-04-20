@@ -10,11 +10,14 @@ export default {
     return isConnected;
   },
   playerStatus({ player }) {
-    const { name, score, state } = player;
+    const {
+      name, score, state, playedCard,
+    } = player;
     return {
       name,
       score,
       isTurn: state === 'IS_PLAYING',
+      playedCard,
     };
   },
 

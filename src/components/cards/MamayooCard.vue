@@ -56,11 +56,11 @@ export default {
   data() {
     return {
       suitIcons: {
-        HEART: '♥',
-        DIAMOND: '♦',
-        SPADE: '♠',
-        CLUB: '♣',
-        MAYOO: 'M',
+        heart: '♥',
+        diamond: '♦',
+        spade: '♠',
+        club: '♣',
+        mayoo: 'M',
       },
     };
   },
@@ -68,8 +68,8 @@ export default {
   computed: {
     cardContentClasses() {
       return {
-        'red--text': ['heart', 'diamond'].includes(this.card.suit.toLowerCase()),
-        'black--text': ['spade', 'club'].includes(this.card.suit.toLowerCase()),
+        'red--text': ['heart', 'diamond'].includes(this.card.suit),
+        'black--text': ['spade', 'club'].includes(this.card.suit),
       };
     },
   },
