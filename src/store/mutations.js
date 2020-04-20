@@ -2,20 +2,26 @@ import groupBy from 'lodash/groupBy';
 
 import mutationTypes from './mutationsTypes';
 
-const savePlayer = (state, newPlayer) => { state.player = newPlayer; };
-const saveOtherPlayers = (state, newOtherPlayers) => {
-  state.otherPlayers = newOtherPlayers || [];
-};
-const toLowerCase = (cards) => cards.map(({ id, suit, value }) => {
+/* const toLowerCase = (cards) => cards.map(({ id, suit, value }) => {
   const cardToLowerCase = {
     id: id.toLowerCase(),
     suit: suit.toLowerCase(),
     value,
   };
   return cardToLowerCase;
-});
+}); */
+
+const savePlayer = (state, newPlayer) => { state.player = newPlayer; };
+const saveOtherPlayers = (state, newOtherPlayers) => {
+  state.otherPlayers = newOtherPlayers || [];
+};
 
 export default {
+  setDice(state, newDice) {
+    state.mamayooDice = {
+      result: newDice,
+    }; // eslint-disable-line
+  },
   [mutationTypes.SAVE_PLAYER](state, newPlayer) {
     savePlayer(state, newPlayer);
   },
@@ -32,7 +38,7 @@ export default {
     state.isConnected = true;
   },
   SOCKET_ONCLOSE(state) {
-    state.socket.isConnected = false;
+    state.isConnected = false;
   },
   SOCKET_ONERROR(state, event) {
     console.error(state, event);
@@ -47,7 +53,7 @@ export default {
 
     const player = {
       ...groupPlayers.true[0],
-      cards: playerCards && toLowerCase(playerCards),
+      cards: playerCards,
     };
     savePlayer(state, player);
 

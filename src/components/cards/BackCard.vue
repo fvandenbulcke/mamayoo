@@ -1,17 +1,24 @@
 <template>
-  <v-container
-    class="lighten-5 pa-0 mam-container"
+  <v-card
+    outlined
+    tile
+    class="mamayoo-card"
   >
-    <v-row
-      no-gutters
-      style="height: 50px;"
-    >
-      <v-col align-self="center"
-        class="d-flex justify-center">
-        <span class="d-inline-flex mam-card">{{ value }}</span>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-card-text class="pa-0 fill-height mamayoo-card-text">
+      <v-container
+        fill-height
+        fluid
+        class="pt-0 pb-0"
+      >
+        <v-row no-gutters
+          class="justify-center"
+          align="center"
+        >
+          <span>{{ value }}</span>
+        </v-row>
+      </v-container>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -29,13 +36,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .mam-container {
+  .mamayoo-card {
     border: solid grey 1px;
     width: 32px;
     border-radius: 20px;
     background: grey;
   }
-  .mam-card {
-    color: white;
+
+  .mamayoo-card-text{
+    color: white!important;
   }
 </style>

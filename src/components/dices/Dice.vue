@@ -2,12 +2,13 @@
   <div>
     <div class="dice">
       <ol
-      class="die-list"
-      :class="{
-        'odd-roll': oddRoll,
-        'even-roll': evenRoll,
-      }"
-      :data-roll="roll" id="die-1"
+        id="die-1"
+        class="die-list"
+        :class="{
+          'odd-roll': oddRoll,
+          'even-roll': evenRoll,
+        }"
+        :data-roll="roll"
       >
         <li
           class="die-item"
@@ -24,23 +25,22 @@
         </li>
       </ol>
     </div>
+    <!-- <v-btn
+      large color="primary"
+      @click="rollDice"
+    >
+      ROLL THE DICE
+    </v-btn> -->
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Dice',
-  props: {
-    mamayooDice: {
-      type: String,
-      required: true,
-    },
-  },
-
   data() {
     return {
-      sides: 6,
       faces: [
         { symbol: 'CLUB', value: '♣' },
         { symbol: 'DIAMOND', value: '♦', isRedSuit: true },
@@ -49,11 +49,34 @@ export default {
         { symbol: 'FAKE', value: '♣' },
         { symbol: 'FAKE2', value: '♦', isRedSuit: true },
       ],
-      dataRoll: 1,
-      roll: this.mamayooDice,
+      roll: null,
       oddRoll: false,
       evenRoll: true,
     };
+  },
+
+  computed: {
+    ...mapGetters(['mamayooDice']),
+  },
+
+  watch: {
+    mamayooDice: {
+      handler: function handler(mamayooDice) {
+        this.rollDice(mamayooDice);
+      },
+    },
+  },
+
+  methods: {
+    rollDice(expectedResult) {
+      this.oddRoll = !this.oddRoll;
+      this.evenRoll = !this.evenRoll;
+      this.roll = expectedResult;
+    },
+  },
+
+  mounted() {
+    this.rollDice(this.mamayooDice);
   },
 };
 </script>

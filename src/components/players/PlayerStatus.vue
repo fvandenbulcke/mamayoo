@@ -10,22 +10,35 @@
     <v-card-subtitle>
       Select cards to give
     </v-card-subtitle>
-    <v-card-text>
+    <v-card-text class="pb-0 d-inline-flex justify-center mamayoo-card-text">
       <BackCard
+        class="ml-auto mr-auto"
         :value="player.score"
       />
-      <v-btn v-if="this.player.isTurn" text small loading>Normal</v-btn>
+      <template v-if="this.player.isTurn">
+        <v-btn  text small loading>Normal</v-btn>
+      </template>
+      <template v-else-if="this.player.playedCard">
+        <mamayoo-card
+          class="ml-auto mr-auto"
+          :card="this.player.playedCard"
+          :is-selected="false"
+          :is-disable="false"
+        />
+      </template>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
 import BackCard from '@/components/cards/BackCard';
+import MamayooCard from '@/components/cards/MamayooCard';
 
 export default {
   name: 'PlayerStatus',
   components: {
     BackCard,
+    MamayooCard,
   },
   props: {
     player: {
@@ -35,3 +48,11 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+  .mamayoo-card-text {
+    min-height: 68px;
+  }
+  .v-card >>> .v-card__text .mamayoo-content{
+    color: green;
+  }
+</style>

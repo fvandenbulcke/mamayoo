@@ -9,7 +9,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    orderedSuits: ['mayoo', 'heart', 'diamond', 'spade', 'club'],
+    mamayooDice: {
+      result: 'CLUB',
+    },
+    orderedSuits: ['MAYOO', 'HEART', 'DIAMOND', 'SPADE', 'CLUB'],
     player: null,
     isConnected: false,
     gameState: {

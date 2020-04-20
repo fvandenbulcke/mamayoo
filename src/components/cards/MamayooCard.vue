@@ -3,6 +3,7 @@
     outlined
     tile
     :ripple="false"
+    class="mamayoo-card"
     :class="{
       'card-selected': this.isSelected,
     }"
@@ -12,8 +13,7 @@
       <v-container
         fill-height
         fluid
-        class="pt-0 pb-0 headline"
-        style="height: 150px;width: 70px;"
+        class="pt-0 pb-0 mamayoo-content"
       >
         <v-row no-gutters class="justify-start">
           <span>{{ suitIcons[card.suit] }}</span>
@@ -49,18 +49,18 @@ export default {
     },
     onClick: {
       type: Function,
-      required: true,
+      required: false,
     },
   },
 
   data() {
     return {
       suitIcons: {
-        heart: '♥',
-        diamond: '♦',
-        spade: '♠',
-        club: '♣',
-        mayoo: 'M',
+        HEART: '♥',
+        DIAMOND: '♦',
+        SPADE: '♠',
+        CLUB: '♣',
+        MAYOO: 'M',
       },
     };
   },
@@ -68,8 +68,8 @@ export default {
   computed: {
     cardContentClasses() {
       return {
-        'red--text': ['heart', 'diamond'].includes(this.card.suit),
-        'black--text': ['spade', 'club'].includes(this.card.suit),
+        'red--text': ['heart', 'diamond'].includes(this.card.suit.toLowerCase()),
+        'black--text': ['spade', 'club'].includes(this.card.suit.toLowerCase()),
       };
     },
   },
@@ -86,24 +86,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .mam-container {
-    border: solid grey 1px;
-    width: 96px;
-    border-radius: 20px;
-    background: white;
-  }
-
-  .card-selected {
-    border-color: blue !important;
-  }
-
-  .mam-card {
-    background-color: transparent;
-    border: none !important;
-    font-size: xx-large !important;
-  }
-  .v-card{
+  .mamayoo-card{
     background-color: transparent;
     border-radius: 10px;
+  }
+  .card-selected {
+    border-color: blue !important;
   }
 </style>

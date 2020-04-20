@@ -6,6 +6,7 @@ import PlayersCircleTranslate from '@/archives/PlayersCircleTranslate';
 import PlayerCards from '@/components/players/PlayerCards';
 import PlayConnectionContainer from '@/components/container/PlayConnectionContainer';
 import PlayGround from '@/views/PlayGround';
+import DiceView from '@/views/DiceView';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const router = new VueRouter({
       path: '/cards', // liste des cartes du joueur + bouton d'envoi
       name: 'playerCards',
       component: PlayerCards,
+    },
+    {
+      path: '/dice', // liste des cartes du joueur + bouton d'envoi
+      name: 'dice',
+      component: DiceView,
     },
     {
       path: '/playground', // /cards + liste des autres joueurs en cartes verticales

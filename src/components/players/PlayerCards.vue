@@ -33,3 +33,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+  .v-card >>> .v-card__text .mamayoo-content{
+    height: 150px;
+    width: 70px;
+    font-size: x-large;
+  }
+</style>
