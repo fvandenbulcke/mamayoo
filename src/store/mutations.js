@@ -3,11 +3,14 @@ import mutationTypes from './mutationsTypes';
 
 
 const updateCardAttributeFormat = (card) => {
-  const { id, suit, value } = card;
+  const {
+    id, suit, value, playable,
+  } = card;
   return {
     id: id.toLowerCase(),
     suit: suit.toLowerCase(),
     value,
+    playable,
   };
 };
 

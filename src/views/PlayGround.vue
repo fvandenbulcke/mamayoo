@@ -131,21 +131,14 @@ export default {
       return this.playerCards.map((c) => {
         const isSelected = this.selectedCardIds.includes(c.id);
         const isSelectable = this.playerStatus.isTurn
-          && (isSelected || this.selectedCardIds.length < this.maxCardToSelect);
+          && (isSelected || this.selectedCardIds.length < this.maxCardToSelect)
+          && c.playable;
         return {
           ...c,
           isSelected,
           isSelectable,
         };
       });
-    },
-
-    isSelectableDuringDonation() {
-      return '';
-    },
-
-    isSelectableDuringTurn() {
-      return '';
     },
   },
 };
