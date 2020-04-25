@@ -3,9 +3,6 @@ import groupBy from 'lodash/groupBy';
 const sortCards = (cardOne, cardTwo) => cardOne.value - cardTwo.value;
 
 export default {
-  /* mamayooDice({ mamayooDice }) {
-    return mamayooDice;
-  }, */
   isConnected({ isConnected }) {
     return isConnected;
   },
@@ -21,7 +18,7 @@ export default {
     };
   },
 
-  sortedPlayerCards({ orderedSuits, player }) {
+  playerCards({ orderedSuits, player }) {
     const sortedCards = [];
     const groupedCards = groupBy(player.cards, 'suit');
     orderedSuits.forEach((suit) => {
@@ -30,15 +27,6 @@ export default {
       }
     });
     return sortedCards;
-  },
-
-  playerCards(state, getters) {
-    return getters.sortedPlayerCards.map((c) => {
-      const cardWithId = {
-        ...c,
-      };
-      return cardWithId;
-    });
   },
 
   otherPlayers({ otherPlayers }) {

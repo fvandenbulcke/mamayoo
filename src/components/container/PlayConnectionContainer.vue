@@ -32,7 +32,7 @@ export default {
   },
 
   created() {
-    Vue.use(VueNativeSock, `ws://localhost:8090/ws/${this.playerStatus.name}`, { store });
+    Vue.use(VueNativeSock, `ws://${window.mamayooConfig.MAMAYOO_BACK_URL}/ws/${this.playerStatus.name}`, { store });
   },
 
 };
