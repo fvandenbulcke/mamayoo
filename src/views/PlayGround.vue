@@ -53,6 +53,12 @@
             :on-click="playSelectedCard"
           />
         </template>
+        <template v-else-if="gameStatus === 'GameOverState'">
+          <game-result
+            :players="allPlayers"
+            :restart="startGame"
+          />
+        </template>
       </v-col>
     </v-row>
 
@@ -79,6 +85,7 @@ import PlayerStatus from '@/components/players/PlayerStatus';
 import PlayerCards from '@/components/players/PlayerCards';
 import MayooActionButton from '@/components/buttons/MayooActionButton';
 import Dice from '@/components/dices/Dice';
+import GameResult from './GameResult';
 
 export default {
   name: 'PlayGround',
@@ -87,11 +94,18 @@ export default {
     PlayerStatus,
     Dice,
     MayooActionButton,
+    GameResult,
   },
 
   data() {
     return {
       selectedCardIds: [],
+      gameStatusInt: 'GameOverState',
+      playersInt: [
+        { name: 'florian', order: 0, score: 223 },
+        { name: 'azerty', order: 1, score: 0 },
+        { name: 'poulet', order: 2, score: 67 },
+      ],
     };
   },
 
@@ -123,11 +137,16 @@ export default {
   computed: {
     ...mapGetters(['playerStatus', 'playerCards', 'otherPlayers', 'gameStatus', 'maxCardToSelect', 'mamayooDice']),
 
+    allPlayers() {
+      return [this.playerStatus].concat(this.otherPlayers);
+    },
+
     actionIsAvaillable() {
       return this.selectedCardIds.length === this.maxCardToSelect;
     },
 
     gameCards() {
+      if (!this.playerCards) { return []; }
       return this.playerCards.map((c) => {
         const isSelected = this.selectedCardIds.includes(c.id);
         const isSelectable = this.playerStatus.isTurn
