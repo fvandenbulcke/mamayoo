@@ -13,7 +13,7 @@ export default {
   name: 'PlayConnectionContainer',
 
   computed: {
-    ...mapGetters(['isConnected', 'playerStatus']),
+    ...mapGetters(['isConnected', 'playerName']),
     table() {
       return this.$route.query.table;
     },
@@ -32,7 +32,7 @@ export default {
   },
 
   created() {
-    Vue.use(VueNativeSock, `ws://${window.mamayooConfig.MAMAYOO_BACK_URL}/ws/${this.playerStatus.name}`, { store });
+    Vue.use(VueNativeSock, `ws://${window.mamayooConfig.MAMAYOO_BACK_URL}/ws/${this.playerName}`, { store });
   },
 
 };

@@ -5,7 +5,7 @@ import mutationTypes from './mutationsTypes';
 
 export default {
   savePlayer({ commit }, player) {
-    return commit(mutationTypes.SAVE_PLAYER, { name: player });
+    return commit(mutationTypes.SAVE_PLAYER, player);
   },
   createTable({ dispatch }) {
     return mamayooService.createTable()

@@ -55,7 +55,7 @@
         </template>
         <template v-else-if="gameStatus === 'GameOverState'">
           <game-result
-            :players="allPlayers"
+            :players="players"
             :restart="startGame"
           />
         </template>
@@ -67,7 +67,8 @@
       class="mt-auto mb-6 justify-center"
     >
       <PlayerStatus
-        :player="playerStatus"
+        v-if="localPlayer"
+        :player="localPlayer"
       />
       <PlayerCards
         class="pa-2"
@@ -135,11 +136,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['playerStatus', 'playerCards', 'otherPlayers', 'gameStatus', 'maxCardToSelect', 'mamayooDice']),
-
-    allPlayers() {
-      return [this.playerStatus].concat(this.otherPlayers);
-    },
+    ...mapGetters(['players', 'localPlayer', 'playerCards', 'otherPlayers', 'gameStatus', 'maxCardToSelect', 'mamayooDice']),
 
     actionIsAvaillable() {
       return this.selectedCardIds.length === this.maxCardToSelect;
@@ -149,7 +146,7 @@ export default {
       if (!this.playerCards) { return []; }
       return this.playerCards.map((c) => {
         const isSelected = this.selectedCardIds.includes(c.id);
-        const isSelectable = this.playerStatus.isTurn
+        const isSelectable = this.localPlayer.isTurn
           && (isSelected || this.selectedCardIds.length < this.maxCardToSelect)
           && c.playable;
         return {
