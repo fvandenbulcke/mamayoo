@@ -7,6 +7,7 @@
     :class="{
       'card-selected': this.isSelected,
     }"
+    :disabled="isDisable"
     @click="select"
   >
     <v-card-text class="pa-0" :class="cardContentClasses">

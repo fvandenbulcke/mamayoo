@@ -21,6 +21,11 @@ export default {
       JSON.stringify({ action: 'GAME_START' }),
     );
   },
+  rollDice() {
+    Vue.prototype.$socket.send(
+      JSON.stringify({ action: 'ROLL_DICE' }),
+    );
+  },
   giveCardsToNeighbour(store, cardIds) {
     const cardIdsUpperCase = cardIds.map((c) => c.toUpperCase());
     Vue.prototype.$socket.send(

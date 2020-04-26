@@ -18,7 +18,7 @@
       <template v-if="this.player.isTurn">
         <v-btn  text small loading>Normal</v-btn>
       </template>
-      <template v-else-if="this.player.playedCard">
+      <template v-if="this.player.playedCard">
         <mamayoo-card
           class="ml-auto mr-auto"
           :card="this.player.playedCard"

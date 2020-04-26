@@ -46,6 +46,8 @@
         <template v-else-if="gameStatus === 'PlayingState'">
           <Dice
             :mamayooDice="mamayooDice"
+            :on-roll-dice="rollDice"
+            :player="localPlayer"
           />
           <MayooActionButton
             label="play card"
@@ -111,7 +113,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['startGame', 'giveCardsToNeighbour', 'playCard']),
+    ...mapActions(['startGame', 'giveCardsToNeighbour', 'playCard', 'rollDice']),
 
     changeCardSelect(cardId) {
       const cardIdsWithoutSelected = this.selectedCardIds.filter((c) => c !== cardId);
@@ -146,7 +148,7 @@ export default {
       if (!this.playerCards) { return []; }
       return this.playerCards.map((c) => {
         const isSelected = this.selectedCardIds.includes(c.id);
-        const isSelectable = this.localPlayer.isTurn
+        const isSelectable = this.localPlayer.isPlaying
           && (isSelected || this.selectedCardIds.length < this.maxCardToSelect)
           && c.playable;
         return {
