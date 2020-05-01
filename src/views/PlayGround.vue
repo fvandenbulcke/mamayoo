@@ -146,9 +146,8 @@ export default {
       if (!this.playerCards) { return []; }
       return this.playerCards.map((c) => {
         const isSelected = this.selectedCardIds.includes(c.id);
-        const isSelectable = this.localPlayer.isTurn
-          && (isSelected || this.selectedCardIds.length < this.maxCardToSelect)
-          && c.playable;
+        const isSelectable = this.localPlayer.isTurn && c.playable
+          && (isSelected || this.selectedCardIds.length < this.maxCardToSelect);
         return {
           ...c,
           isSelected,

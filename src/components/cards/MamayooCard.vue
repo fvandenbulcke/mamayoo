@@ -68,6 +68,7 @@ export default {
   computed: {
     cardContentClasses() {
       return {
+        'mamayoo-card-content': true,
         'red--text': ['heart', 'diamond'].includes(this.card.suit),
         'black--text': ['spade', 'club'].includes(this.card.suit),
       };
@@ -87,7 +88,7 @@ export default {
 
 <style lang="scss" scoped>
   .mamayoo-card{
-    background-color: transparent;
+    background-color: white;
     border-radius: 10px;
   }
   .card-selected {
