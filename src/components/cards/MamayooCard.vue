@@ -1,13 +1,14 @@
 <template>
   <v-card
-    outlined
+    shaped
     tile
     :ripple="false"
     class="mamayoo-card"
     :class="{
       'card-selected': this.isSelected,
     }"
-    @click="select"
+    :disabled="isDisable"
+    v-on:click.native="onClick"
   >
     <v-card-text class="pa-0" :class="cardContentClasses">
       <v-container
@@ -75,14 +76,6 @@ export default {
     },
   },
 
-  methods: {
-    select() {
-      if (!this.isDisable) {
-        this.onClick();
-      }
-    },
-  },
-
 };
 </script>
 
@@ -90,8 +83,12 @@ export default {
   .mamayoo-card{
     background-color: white;
     border-radius: 10px;
+    user-select: none;
   }
   .card-selected {
-    border-color: blue !important;
+    transform: translateY(-20px);
+  }
+  .mamayoo-card.v-card--disabled{
+    background: #dedede;
   }
 </style>

@@ -17,6 +17,7 @@
         :value="player.score"
       />
       <mamayoo-card
+        v-if="this.player.playedCard"
         class="ml-auto mr-auto player-status-playcard"
         :card="this.player.playedCard"
         :is-selected="false"
@@ -51,7 +52,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .player-status-card-text {
     min-height: 68px;
   }

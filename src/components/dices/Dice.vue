@@ -7,6 +7,7 @@
         :class="{
           'odd-roll': oddRoll,
           'even-roll': evenRoll,
+          'no-roll': noRoll,
         }"
         :data-roll="roll"
       >
@@ -25,12 +26,13 @@
         </li>
       </ol>
     </div>
-    <!-- <v-btn
+    <v-btn
+      v-if="haveToBeRolled"
       large color="primary"
-      @click="rollDice"
+      @click="onRollDice()"
     >
       ROLL THE DICE
-    </v-btn> -->
+    </v-btn>
   </div>
 </template>
 
@@ -46,13 +48,25 @@ export default {
         { symbol: 'DIAMOND', value: '♦', isRedSuit: true },
         { symbol: 'SPADE', value: '♠' },
         { symbol: 'HEART', value: '♥', isRedSuit: true },
-        { symbol: 'FAKE', value: '♣' },
+        { symbol: 'NONE', value: '?' },
         { symbol: 'FAKE2', value: '♦', isRedSuit: true },
       ],
-      roll: null,
+      roll: 'NONE',
       oddRoll: false,
       evenRoll: true,
+      noRoll: true,
     };
+  },
+
+  props: {
+    onRollDice: {
+      type: Function,
+      required: true,
+    },
+    haveToBeRolled: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   computed: {
@@ -62,21 +76,27 @@ export default {
   watch: {
     mamayooDice: {
       handler: function handler(mamayooDice) {
-        this.rollDice(mamayooDice);
+        this.setDice(mamayooDice);
       },
     },
   },
 
   methods: {
-    rollDice(expectedResult) {
-      this.oddRoll = !this.oddRoll;
-      this.evenRoll = !this.evenRoll;
-      this.roll = expectedResult;
+    setDice(mamayooDice) {
+      if (mamayooDice) {
+        this.oddRoll = !this.oddRoll;
+        this.evenRoll = !this.evenRoll;
+        this.noRoll = false;
+        this.roll = mamayooDice;
+      } else {
+        this.noRoll = true;
+        this.roll = 'NONE';
+      }
     },
   },
 
   mounted() {
-    this.rollDice(this.mamayooDice);
+    // this.setDice(this.mamayooDice);
   },
 };
 </script>
@@ -123,6 +143,9 @@ export default {
   .odd-roll {
     transition: transform 1.25s ease-out;
   }
+  .no-roll {
+    transition: transform 0s;
+  }
   .die-item {
     background-color: #fefefe;
     box-shadow: inset -0.35rem 0.35rem 0.75rem rgba(0, 0, 0, 0.3),
@@ -151,7 +174,7 @@ export default {
   .even-roll[data-roll="HEART"] {
     transform: rotateX(360deg) rotateY(810deg) rotateZ(360deg);
   }
-  .even-roll[data-roll="FAKE"] {
+  .even-roll[data-roll="NONE"] {
     transform: rotateX(270deg) rotateY(720deg) rotateZ(360deg);
   }
   .even-roll[data-roll="FAKE2"] {
@@ -169,7 +192,7 @@ export default {
   .odd-roll[data-roll="HEART"] {
     transform: rotateX(-360deg) rotateY(-630deg) rotateZ(-360deg);
   }
-  .odd-roll[data-roll="FAKE"] {
+  .odd-roll[data-roll="NONE"] {
     transform: rotateX(-450deg) rotateY(-720deg) rotateZ(-360deg);
   }
   .odd-roll[data-roll="FAKE2"] {
@@ -187,7 +210,7 @@ export default {
   [data-side="HEART"] {
     transform: rotate3d(0, -1, 0, 90deg) translateZ(3rem);
   }
-  [data-side="FAKE"] {
+  [data-side="NONE"] {
     transform: rotate3d(1, 0, 0, 90deg) translateZ(3rem);
   }
   [data-side="FAKE2"] {

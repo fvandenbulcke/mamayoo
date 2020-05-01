@@ -7,6 +7,7 @@
     <v-responsive :aspect-ratio="1">
       <v-btn
         class="button"
+        color="primary"
         :disabled="isDisabled"
         @click="onClick"
       >

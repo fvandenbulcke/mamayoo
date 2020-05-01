@@ -15,7 +15,9 @@ export default {
     return players && players.map((p) => {
       const player = {
         ...p,
-        isTurn: p.state === 'IS_PLAYING',
+        haveToRollDice: p.state === 'HAVE_TO_ROLL_DICE',
+        isPlaying: p.state === 'IS_PLAYING',
+        isTurn: p.state === 'IS_PLAYING' || p.state === 'HAVE_TO_ROLL_DICE',
       };
       delete player.state;
       return player;
