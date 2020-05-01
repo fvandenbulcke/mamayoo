@@ -29,7 +29,8 @@
       <v-col
         class="d-flex justify-center"
       >
-        <template v-if="gameStatus === 'WaitingPlayerState'">
+        <template v-if="gameStatus === 'WaitingPlayerState'
+        || gameStatus === 'WaitingForPlayingState'">
           <MayooActionButton
             label="START GAME"
             :is-disabled="false"
