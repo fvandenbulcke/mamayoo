@@ -52,7 +52,4 @@ export default {
   .mamayoo-card-text {
     min-height: 68px;
   }
-  .v-card >>> .v-card__text .mamayoo-content{
-    color: green;
-  }
 </style>
