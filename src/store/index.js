@@ -14,7 +14,7 @@ export default new Vuex.Store({
   state: {
     orderedSuits: [
       CONSTANTS.SUIT_MAYOO, CONSTANTS.SUIT_HEART,
-      CONSTANTS.SUIT_DIAMOND, CONSTANTS.SUIT_SPADE, CONSTANTS.SUIT_CLUB,
+      CONSTANTS.SUIT_SPADE, CONSTANTS.SUIT_DIAMOND, CONSTANTS.SUIT_CLUB,
     ],
     playerName: null,
     isConnected: false,
