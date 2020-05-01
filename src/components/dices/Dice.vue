@@ -27,7 +27,7 @@
       </ol>
     </div>
     <v-btn
-      v-if="this.player.haveToRollDice"
+      v-if="haveToBeRolled"
       large color="primary"
       @click="onRollDice()"
     >
@@ -63,8 +63,8 @@ export default {
       type: Function,
       required: true,
     },
-    player: {
-      type: Object,
+    haveToBeRolled: {
+      type: Boolean,
       required: true,
     },
   },
@@ -83,7 +83,7 @@ export default {
 
   methods: {
     setDice(mamayooDice) {
-      if (mamayooDice != null) {
+      if (mamayooDice) {
         this.oddRoll = !this.oddRoll;
         this.evenRoll = !this.evenRoll;
         this.noRoll = false;

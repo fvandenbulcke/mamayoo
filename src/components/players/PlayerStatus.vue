@@ -1,32 +1,36 @@
 <template>
   <v-card
     class="pa-2"
+    :class="{
+      'win-turn-player': player.winTheTurn
+    }"
+    min-width="170"
     outlined
     tile
   >
-    <v-card-title>
+    <v-card-title class="pt-0 pb-2">
       {{ player.name }}
     </v-card-title>
-    <v-card-subtitle>
-      Select cards to give
-    </v-card-subtitle>
-    <v-card-text class="pb-0 d-inline-flex justify-center mamayoo-card-text">
+    <v-card-text class="pb-0 d-inline-flex justify-center player-status-card-text">
       <BackCard
         class="ml-auto mr-auto"
         :value="player.score"
       />
-      <template v-if="this.player.isTurn">
-        <v-btn  text small loading>Normal</v-btn>
-      </template>
-      <template v-if="this.player.playedCard">
-        <mamayoo-card
-          class="ml-auto mr-auto"
-          :card="this.player.playedCard"
-          :is-selected="false"
-          :is-disable="false"
-        />
-      </template>
+      <mamayoo-card
+        v-if="this.player.playedCard"
+        class="ml-auto mr-auto player-status-playcard"
+        :card="this.player.playedCard"
+        :is-selected="false"
+        :is-disable="false"
+      />
     </v-card-text>
+    <v-card-actions v-if="this.player.isTurn">
+      <v-progress-linear
+        color="deep-purple accent-4"
+        indeterminate
+        height="20"
+      ></v-progress-linear>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -49,7 +53,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  .mamayoo-card-text {
+  .player-status-card-text {
     min-height: 68px;
+  }
+
+  .win-turn-player {
+    background-color: #F6C8CD;
+  }
+
+  .player-status-playcard .mamayoo-card-content {
+    font-size: large;
   }
 </style>

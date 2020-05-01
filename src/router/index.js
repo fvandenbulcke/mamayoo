@@ -6,6 +6,7 @@ import PlayersCircleTranslate from '@/archives/PlayersCircleTranslate';
 import PlayerCards from '@/components/players/PlayerCards';
 import PlayConnectionContainer from '@/components/container/PlayConnectionContainer';
 import PlayGround from '@/views/PlayGround';
+import TestView from '@/archives/TestView';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const router = new VueRouter({
       path: '/cards', // liste des cartes du joueur + bouton d'envoi
       name: 'playerCards',
       component: PlayerCards,
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: TestView,
     },
     {
       path: '/playground', // /cards + liste des autres joueurs en cartes verticales
