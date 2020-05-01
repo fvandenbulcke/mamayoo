@@ -50,11 +50,6 @@
             :on-roll-dice="rollDice"
             :have-to-be-rolled="localPlayer.haveToRollDice"
           />
-          <MayooActionButton
-            label="play card"
-            :is-disabled="!actionIsAvaillable"
-            :on-click="playSelectedCard"
-          />
         </template>
         <template v-else-if="gameStatus === 'GameOverState'">
           <game-result
@@ -76,7 +71,7 @@
       <PlayerCards
         class="pa-2"
         :game-cards="gameCards"
-        :on-card-click="changeCardSelect"
+        :on-card-click="onCardClick"
       />
     </v-row>
   </v-container>
@@ -116,24 +111,23 @@ export default {
   methods: {
     ...mapActions(['startGame', 'giveCardsToNeighbour', 'playCard', 'rollDice']),
 
-    changeCardSelect(cardId) {
-      const cardIdsWithoutSelected = this.selectedCardIds.filter((c) => c !== cardId);
-      if (cardIdsWithoutSelected.length === this.selectedCardIds.length) {
-        // ajout
-        this.selectedCardIds.push(cardId);
-      } else {
-        // suppression
-        this.selectedCardIds = cardIdsWithoutSelected;
+    onCardClick(cardId) {
+      if (this.gameStatus === 'WaitingCardDonationState') {
+        const cardIdsWithoutSelected = this.selectedCardIds.filter((c) => c !== cardId);
+        if (cardIdsWithoutSelected.length === this.selectedCardIds.length) {
+          // ajout
+          this.selectedCardIds.push(cardId);
+        } else {
+          // suppression
+          this.selectedCardIds = cardIdsWithoutSelected;
+        }
+      } else if (this.gameStatus === 'PlayingState') {
+        this.playCard(cardId);
       }
     },
 
     giveSelectedCards() {
       this.giveCardsToNeighbour(this.selectedCardIds)
-        .then(() => { this.selectedCardIds = []; });
-    },
-
-    playSelectedCard() {
-      this.playCard(this.selectedCardIds[0])
         .then(() => { this.selectedCardIds = []; });
     },
   },
@@ -149,10 +143,13 @@ export default {
       if (!this.playerCards) { return []; }
       return this.playerCards.map((c) => {
         const isSelected = this.selectedCardIds.includes(c.id);
-        const isSelectable = this.localPlayer.isTurn && c.playable
+        const isSelectable = this.localPlayer.isTurn
+          && !this.localPlayer.haveToRollDice
+          && c.playable
           && (isSelected || this.selectedCardIds.length < this.maxCardToSelect);
         return {
           ...c,
+          notPlayable: !c.playable,
           isSelected,
           isSelectable,
         };

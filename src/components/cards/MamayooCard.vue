@@ -6,8 +6,9 @@
     class="mamayoo-card"
     :class="{
       'card-selected': this.isSelected,
+      'disable-events': this.isDisable,
+      'not-playable': this.card.notPlayable,
     }"
-    :disabled="isDisable"
     v-on:click.native="onClick"
   >
     <v-card-text class="pa-0" :class="cardContentClasses">
@@ -88,7 +89,10 @@ export default {
   .card-selected {
     transform: translateY(-20px);
   }
-  .mamayoo-card.v-card--disabled{
+  .not-playable{
     background: #dedede;
+  }
+  .disable-events {
+    pointer-events: none
   }
 </style>
