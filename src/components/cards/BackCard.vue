@@ -3,6 +3,7 @@
     outlined
     tile
     class="mamayoo-card"
+    color="primary"
   >
     <v-card-text class="pa-0 fill-height mamayoo-card-text">
       <v-container
@@ -36,10 +37,8 @@ export default {
 
 <style lang="scss" scoped>
   .mamayoo-card {
-    border: solid grey 1px;
     width: 32px;
     border-radius: 20px;
-    background: grey;
   }
 
   .mamayoo-card-text{

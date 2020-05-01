@@ -8,8 +8,16 @@
     outlined
     tile
   >
-    <v-card-title class="pt-0 pb-2">
-      {{ player.name }}
+    <v-card-title class="pt-0 pb-2 justify-center">
+      <v-chip
+        class="ma-2"
+        color="primary"
+        outlined
+        pill
+      >
+        <v-icon left>mdi-account-outline</v-icon>
+        {{ player.name }}
+      </v-chip>
     </v-card-title>
     <v-card-text class="pb-0 d-inline-flex justify-center player-status-card-text">
       <BackCard
@@ -26,9 +34,9 @@
     </v-card-text>
     <v-card-actions v-if="this.player.isTurn">
       <v-progress-linear
-        color="deep-purple accent-4"
+        color="primary accent-4"
         indeterminate
-        height="20"
+        height="10"
       ></v-progress-linear>
     </v-card-actions>
   </v-card>
