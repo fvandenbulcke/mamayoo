@@ -8,6 +8,7 @@
       'card-selected': this.isSelected,
       'disable-events': this.isDisable,
       'not-playable': this.card.notPlayable,
+      'is-winning': this.card.winning
     }"
     v-on:click.native="onClick"
   >
@@ -85,6 +86,7 @@ export default {
     background-color: white;
     border-radius: 10px;
     user-select: none;
+    cursor: pointer;
   }
   .card-selected {
     transform: translateY(-20px);
@@ -94,5 +96,12 @@ export default {
   }
   .disable-events {
     pointer-events: none
+  }
+  .is-winning {
+    animation: blinker .8s linear infinite;
+    border: 2px red solid;
+  }
+  @keyframes blinker {
+    50% { border-color: white; }
   }
 </style>
