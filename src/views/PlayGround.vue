@@ -149,7 +149,7 @@ export default {
           && (isSelected || this.selectedCardIds.length < this.maxCardToSelect);
         return {
           ...c,
-          notPlayable: !c.playable,
+          notPlayable: this.localPlayer.isPlaying && !c.playable,
           isSelected,
           isSelectable,
         };

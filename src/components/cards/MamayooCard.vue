@@ -8,7 +8,7 @@
       'card-selected': this.isSelected,
       'disable-events': this.isDisable,
       'not-playable': this.card.notPlayable,
-      'is-winning': this.card.winning
+      'is-winning': isWinning
     }"
     v-on:click.native="onClick"
   >
@@ -40,6 +40,10 @@ export default {
   props: {
     card: {
       type: Object,
+      required: true,
+    },
+    isWinning: {
+      type: Boolean,
       required: true,
     },
     isSelected: {

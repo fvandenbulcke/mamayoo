@@ -30,6 +30,7 @@
         :card="this.player.playedCard"
         :is-selected="false"
         :is-disable="false"
+        :is-winning="player.winTurn"
       />
     </v-card-text>
     <v-card-actions v-if="this.player.isTurn">
