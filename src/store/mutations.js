@@ -30,10 +30,12 @@ export default {
     state.isConnected = true;
   },
   SOCKET_ONCLOSE(state) {
+    console.info('SOCKET_ONCLOSE');
     state.isConnected = false;
   },
   SOCKET_ONERROR(state, event) {
-    console.error(state, event);
+    console.info('SOCKET_ONERROR');
+    console.info(event);
   },
   // default handler called for all methods
   SOCKET_ONMESSAGE(state, message) {
@@ -60,10 +62,10 @@ export default {
     };
   },
   // mutations for reconnect methods
-  SOCKET_RECONNECT(state, count) {
-    console.info(state, count);
+  SOCKET_RECONNECT() {
+    console.info('SOCKET_RECONNECT');
   },
-  SOCKET_RECONNECT_ERROR(state) {
-    state.socket.reconnectError = true;
+  SOCKET_RECONNECT_ERROR() {
+    console.info('SOCKET_RECONNECT_ERROR');
   },
 };
