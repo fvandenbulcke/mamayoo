@@ -33,8 +33,10 @@ export default {
 
   created() {
     const options = {
-      reconnection: true,
       store,
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 3000,
     };
     Vue.use(VueNativeSock, `ws://${window.mamayooConfig.MAMAYOO_BACK_URL}/ws/${this.playerName}`, options);
   },
