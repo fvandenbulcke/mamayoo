@@ -6,6 +6,7 @@
       :card="card"
       :is-selected="card.isSelected"
       :is-disable="!card.isSelectable"
+      :isWinning="false"
       :on-click="() => onCardClick(card.id)"
     />
   </div>

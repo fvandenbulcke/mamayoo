@@ -24,7 +24,7 @@
     <v-row
       align="center"
       no-gutters
-      class="mb-auto"
+      class="ma-0"
     >
       <v-col
         class="d-flex justify-center"
@@ -50,6 +50,7 @@
             :on-roll-dice="rollDice"
             :have-to-be-rolled="localPlayer.haveToRollDice"
           />
+          <PlayedCardsArea/>
         </template>
         <template v-else-if="gameStatus === 'GameOverState'">
           <game-result
@@ -84,6 +85,7 @@ import PlayerStatus from '@/components/players/PlayerStatus';
 import PlayerCards from '@/components/players/PlayerCards';
 import MayooActionButton from '@/components/buttons/MayooActionButton';
 import Dice from '@/components/dices/Dice';
+import PlayedCardsArea from './PlayedCardsArea';
 import GameResult from './GameResult';
 
 export default {
@@ -93,6 +95,7 @@ export default {
     PlayerStatus,
     Dice,
     MayooActionButton,
+    PlayedCardsArea,
     GameResult,
   },
 

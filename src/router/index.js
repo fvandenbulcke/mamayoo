@@ -6,7 +6,9 @@ import PlayersCircleTranslate from '@/archives/PlayersCircleTranslate';
 import PlayerCards from '@/components/players/PlayerCards';
 import PlayConnectionContainer from '@/components/container/PlayConnectionContainer';
 import PlayGround from '@/views/PlayGround';
-import TestView from '@/archives/TestView';
+import TestDragNDrop from '@/archives/TestDragNDrop';
+import TestPlayerStatus from '@/archives/TestPlayerStatus';
+import TestCardsZone from '@/archives/TestCardsZone';
 
 Vue.use(VueRouter);
 
@@ -24,9 +26,19 @@ const router = new VueRouter({
       component: PlayerCards,
     },
     {
-      path: '/test',
-      name: 'test',
-      component: TestView,
+      path: '/test/drag',
+      name: 'testDragNDrop',
+      component: TestDragNDrop,
+    },
+    {
+      path: '/test/status',
+      name: 'testPlayerStatus',
+      component: TestPlayerStatus,
+    },
+    {
+      path: '/test/zone',
+      name: 'testCardsZone',
+      component: TestCardsZone,
     },
     {
       path: '/playground', // /cards + liste des autres joueurs en cartes verticales

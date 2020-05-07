@@ -1,9 +1,6 @@
 <template>
   <v-card
     class="pa-2"
-    :class="{
-      'win-turn-player': player.winTheTurn
-    }"
     min-width="170"
     outlined
     tile
@@ -64,10 +61,6 @@ export default {
 <style lang="scss" scoped>
   .player-status-card-text {
     min-height: 68px;
-  }
-
-  .win-turn-player {
-    background-color: #F6C8CD;
   }
 
   .player-status-playcard .mamayoo-card-content {

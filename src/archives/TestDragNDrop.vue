@@ -99,33 +99,19 @@
         </draggable>
       </v-col>
     </v-row>
-    <v-row class="mb-5">
-      <v-col md="12">
-        <h3>LES DIFFERENTS STATUTS D'UN JOUEUR</h3>
-        <div class="d-flex flex-wrap">
-          <PlayerStatus
-            v-for="localPlayer in localPlayers"
-            :key="localPlayer.name"
-            :player="localPlayer"
-          />
-        </div>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 <script>
 import draggable from 'vuedraggable';
 import MamayooCard from '@/components/cards/MamayooCard';
-import PlayerStatus from '@/components/players/PlayerStatus';
 
 export default {
-  name: 'two-lists',
-  display: 'Two Lists',
+  name: 'TestDragNDrop',
+  display: 'TestDragNDrop',
   order: 1,
   components: {
     draggable,
     MamayooCard,
-    PlayerStatus,
   },
   data() {
     return {
@@ -150,30 +136,6 @@ export default {
         { id: 5, suit: 'heart', value: '6' },
         { id: 6, suit: 'spade', value: '1' },
       ],
-      localPlayers: [{
-        name: 'florian',
-        score: 10,
-        isTurn: false,
-        winTheTurn: false,
-        playedCard: {
-          suit: 'diamond',
-          value: 7,
-        },
-      }, {
-        name: 'Thomas',
-        score: 10,
-        isTurn: true,
-        winTheTurn: false,
-      }, {
-        name: 'Lucie',
-        score: 10,
-        isTurn: false,
-        winTheTurn: true,
-        playedCard: {
-          suit: 'mayoo',
-          value: 10,
-        },
-      }],
     };
   },
   methods: {

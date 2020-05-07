@@ -56,6 +56,16 @@ export default {
     return sortedCards;
   },
 
+  playedCards(state, { localPlayer, otherPlayers }) {
+    const playedCards = [
+      { card: localPlayer.playedCard, position: 1 },
+    ];
+    const otherPlayedCards = otherPlayers
+      .map((p, index) => ({ card: p.playedCard, position: index + 2 }));
+    playedCards.push(...otherPlayedCards);
+    return playedCards.filter((pc) => pc.card);
+  },
+
   gameState({ gameState }) {
     return gameState;
   },
