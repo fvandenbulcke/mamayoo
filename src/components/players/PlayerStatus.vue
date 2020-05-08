@@ -21,10 +21,13 @@
         class="ml-auto mr-auto"
         :value="player.score"
       />
+      <v-img v-if="player.winTurn" src="@/assets/bomb.gif" aspect-ratio="1.7"/>
+      <v-img v-else-if="player.hasPlayed7ofRequestedSuit"
+        src="@/assets/troll.gif" aspect-ratio="1.7"/>
       <mamayoo-card
-        v-if="this.player.playedCard"
+        v-else-if="player.playedCard"
         class="ml-auto mr-auto player-status-playcard"
-        :card="this.player.playedCard"
+        :card="player.playedCard"
         :is-selected="false"
         :is-disable="false"
         :is-winning="player.winTurn"

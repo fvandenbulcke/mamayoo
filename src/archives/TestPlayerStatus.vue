@@ -8,6 +8,7 @@
             v-for="localPlayer in localPlayers"
             :key="localPlayer.name"
             :player="localPlayer"
+            :requested-suit="requestedSuit"
           />
         </div>
       </v-col>
@@ -26,20 +27,31 @@ export default {
   },
   data() {
     return {
+      requestedSuit: 'diamond',
       localPlayers: [{
-        name: 'florian',
+        name: 'Thomas',
+        score: 10,
+        isTurn: true,
+        winTurn: false,
+      }, {
+        name: 'Julien',
         score: 10,
         isTurn: false,
         winTurn: false,
         playedCard: {
           suit: 'diamond',
-          value: 7,
+          value: 10,
         },
       }, {
-        name: 'Thomas',
+        name: 'florian',
         score: 10,
-        isTurn: true,
+        isTurn: false,
         winTurn: false,
+        hasPlayed7ofRequestedSuit: true,
+        playedCard: {
+          suit: 'diamond',
+          value: 7,
+        },
       }, {
         name: 'Lucie',
         score: 10,
@@ -51,42 +63,6 @@ export default {
         },
       }],
     };
-  },
-  methods: {
-    add() {
-      window.console.log('add()');
-      window.console.log(this.row1);
-    },
-    remove() {
-      window.console.log('remove()');
-      window.console.log(this.row1);
-    },
-    update() {
-      window.console.log('update()');
-      window.console.log(this.row1);
-    },
-    startDragging() {
-      this.dragging = true;
-      window.console.log('startDragging()');
-      window.console.log(this.row1);
-    },
-    endDragging() {
-      this.dragging = false;
-      window.console.log('endDragging()');
-      window.console.log(this.row1);
-    },
-    changeDragging() {
-      window.console.log('changeDragging()');
-      window.console.log(this.row1);
-    },
-
-    checkMove(e) {
-      window.console.log(`Future index: ${e.draggedContext.futureIndex}`);
-    },
-
-    log(evt) {
-      window.console.log(evt);
-    },
   },
 };
 </script>
