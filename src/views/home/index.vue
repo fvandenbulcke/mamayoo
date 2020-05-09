@@ -99,7 +99,7 @@ export default {
     },
 
     goToPlayView(table) {
-      this.$router.push({ name: 'playground', query: { table } });
+      this.$router.push({ name: 'playground', query: { table, player: this.pseudo } });
     },
   },
 

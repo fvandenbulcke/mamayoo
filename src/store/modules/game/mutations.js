@@ -1,5 +1,3 @@
-import mutationTypes from './mutationsTypes';
-
 
 const updateCardAttributeFormat = (card) => {
   if (!card) { return null; }
@@ -18,28 +16,9 @@ const updateCardAttributeFormat = (card) => {
 const updateCardsAttributeFormat = (cards) => cards && cards.map(updateCardAttributeFormat);
 
 export default {
-  setDice(state, newDice) {
-    state.mamayooDice = {
-      result: newDice,
-    }; // eslint-disable-line
-  },
-  [mutationTypes.SAVE_PLAYER](state, newPlayerName) {
-    state.playerName = newPlayerName;
-  },
-  SOCKET_ONOPEN(state) {
-    state.isConnected = true;
-  },
-  SOCKET_ONCLOSE(state) {
-    console.info('SOCKET_ONCLOSE');
-    state.isConnected = false;
-  },
-  SOCKET_ONERROR(state, event) {
-    console.info('SOCKET_ONERROR');
-    console.info(event);
-  },
   // default handler called for all methods
   SOCKET_ONMESSAGE(state, message) {
-    const { gameInfo, playerCards } = JSON.parse(message.data);
+    const { gameInfo, playerCards } = message;
     const { howManyCardsToDonate, players, mamayooDice } = gameInfo;
 
     // players
@@ -60,12 +39,5 @@ export default {
       maxCardToSelect: howManyCardsToDonate,
       mamayooDice,
     };
-  },
-  // mutations for reconnect methods
-  SOCKET_RECONNECT() {
-    console.info('SOCKET_RECONNECT');
-  },
-  SOCKET_RECONNECT_ERROR() {
-    console.info('SOCKET_RECONNECT_ERROR');
   },
 };

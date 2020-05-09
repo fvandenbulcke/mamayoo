@@ -1,65 +1,65 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import * as CONSTANTS from '@/utils/constants';
+import mamayooService from '@/services/mamayooService';
 
-import actions from './actions';
-import mutations from './mutations';
-import getters from './getters';
-
+import mutationTypes from './mutationsTypes';
+import game from './modules/game';
+import error from './modules/error';
 
 Vue.use(Vuex);
 
+const actions = {
+  savePlayer({ commit }, player) {
+    return commit(mutationTypes.SAVE_PLAYER, player);
+  },
+  createTable({ dispatch }) {
+    return mamayooService.createTable()
+      .then((response) => dispatch('joinTable', response.createdTable));
+  },
+};
+
+const mutations = {
+  [mutationTypes.SAVE_PLAYER](state, newPlayerName) {
+    state.playerName = newPlayerName;
+  },
+  SOCKET_ONOPEN(state) {
+    state.isConnected = true;
+  },
+  SOCKET_ONCLOSE(state, event) {
+    console.info('SOCKET_ONCLOSE');
+    state.isConnected = false;
+    console.info(event);
+  },
+  // mutations for reconnect methods
+  SOCKET_RECONNECT() {
+    console.info('SOCKET_RECONNECT');
+  },
+  SOCKET_RECONNECT_ERROR() {
+    console.info('SOCKET_RECONNECT_ERROR');
+  },
+};
+
+const getters = {
+  playerName({ playerName }) {
+    return playerName;
+  },
+
+  isConnected({ isConnected }) {
+    return isConnected;
+  },
+};
+
 export default new Vuex.Store({
   state: {
-    orderedSuits: [
-      CONSTANTS.SUIT_MAYOO, CONSTANTS.SUIT_HEART,
-      CONSTANTS.SUIT_SPADE, CONSTANTS.SUIT_DIAMOND, CONSTANTS.SUIT_CLUB,
-    ],
     playerName: null,
     isConnected: false,
-    gameState: {
-      turnNumber: 1,
-      status: 'give_card',
-      maxCardToSelect: 2,
-      /* player0: { points: 0, status: 'played' },
-      player1: { points: 10, status: 'played' },
-      player2: { points: 20, status: 'played' },
-      player3: { points: 30, status: 'playing' },
-      player4: { points: 40, status: 'toPlay' },
-      player5: { points: 50, status: 'toPlay' },
-      player6: { points: 60, status: 'toPlay' },
-      player7: { points: 70, status: 'toPlay' }, */
-    },
-    players: null,
-    playerCards: null,
-    playerCardsInit: [
-      { suit: 'heart', value: '7' },
-      { suit: 'diamond', value: '10' },
-      { suit: 'payoo', value: '7' },
-      { suit: 'club', value: '7' },
-      { suit: 'spade', value: '4' },
-      { suit: 'heart', value: '4' },
-      { suit: 'payoo', value: '4' },
-      { suit: 'diamond', value: '8' },
-      { suit: 'club', value: '9' },
-      { suit: 'diamond', value: '3' },
-      { suit: 'spade', value: '10' },
-    ],
-    otherPlayers: [],
-    otherPlayersInit: [
-      { id: 'player1', name: 'Thomas' },
-      { id: 'player2', name: 'Lucie' },
-      { id: 'player3', name: 'Julien' },
-      { id: 'player4', name: 'Matthieu' },
-      { id: 'player5', name: 'Eric' },
-      { id: 'player6', name: 'Greg' },
-      { id: 'player7', name: 'Sebastien' },
-    ],
   },
   mutations,
   actions,
   getters,
   modules: {
+    game,
+    error,
   },
 });

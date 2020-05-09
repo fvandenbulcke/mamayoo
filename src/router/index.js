@@ -5,6 +5,7 @@ import PlayersCircleGrid from '@/archives/PlayersCircleGrid';
 import PlayersCircleTranslate from '@/archives/PlayersCircleTranslate';
 import PlayerCards from '@/components/players/PlayerCards';
 import PlayConnectionContainer from '@/components/container/PlayConnectionContainer';
+import ErrorManagerContainer from '@/components/container/ErrorManagerContainer';
 import PlayGround from '@/views/PlayGround';
 import TestDragNDrop from '@/archives/TestDragNDrop';
 import TestPlayerStatus from '@/archives/TestPlayerStatus';
@@ -46,8 +47,14 @@ const router = new VueRouter({
       children: [
         {
           path: '',
-          name: 'playground',
-          component: PlayGround,
+          component: ErrorManagerContainer,
+          children: [
+            {
+              path: '',
+              name: 'playground',
+              component: PlayGround,
+            },
+          ],
         },
       ],
     },

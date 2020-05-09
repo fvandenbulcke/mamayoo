@@ -1,16 +1,6 @@
 import Vue from 'vue';
 
-import mamayooService from '@/services/mamayooService';
-import mutationTypes from './mutationsTypes';
-
 export default {
-  savePlayer({ commit }, player) {
-    return commit(mutationTypes.SAVE_PLAYER, player);
-  },
-  createTable({ dispatch }) {
-    return mamayooService.createTable()
-      .then((response) => dispatch('joinTable', response.createdTable));
-  },
   joinTable(store, tableId) {
     Vue.prototype.$socket.send(
       JSON.stringify({ action: 'GAME_JOIN', value: tableId }),

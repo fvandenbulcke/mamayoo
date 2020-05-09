@@ -70,7 +70,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['mamayooDice']),
+    ...mapGetters('game', ['mamayooDice']),
   },
 
   watch: {
@@ -93,10 +93,6 @@ export default {
         this.roll = 'NONE';
       }
     },
-  },
-
-  mounted() {
-    // this.setDice(this.mamayooDice);
   },
 };
 </script>

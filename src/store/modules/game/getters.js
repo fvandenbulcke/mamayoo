@@ -3,14 +3,6 @@ import groupBy from 'lodash/groupBy';
 const sortCards = (cardOne, cardTwo) => cardOne.value - cardTwo.value;
 
 export default {
-  playerName({ playerName }) {
-    return playerName;
-  },
-
-  isConnected({ isConnected }) {
-    return isConnected;
-  },
-
   players({ players }) {
     return players && players.map((p) => {
       const player = {
@@ -24,7 +16,7 @@ export default {
     });
   },
 
-  groupedPlayers({ playerName }, { players }) {
+  groupedPlayers(state, { players }, { playerName }) {
     const groupPlayers = players && groupBy(players, (p) => p.name === playerName);
     return groupPlayers;
   },

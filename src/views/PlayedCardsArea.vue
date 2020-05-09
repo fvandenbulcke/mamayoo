@@ -15,8 +15,10 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex';
 import MamayooCard from '@/components/cards/MamayooCard';
-import { mapGetters } from 'vuex';
+
+const { mapGetters } = createNamespacedHelpers('game');
 
 export default {
   name: 'PlayedCardsArea',

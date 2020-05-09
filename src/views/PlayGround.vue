@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
 
 import PlayerStatus from '@/components/players/PlayerStatus';
 import PlayerCards from '@/components/players/PlayerCards';
@@ -87,6 +87,8 @@ import MayooActionButton from '@/components/buttons/MayooActionButton';
 import Dice from '@/components/dices/Dice';
 import PlayedCardsArea from './PlayedCardsArea';
 import GameResult from './GameResult';
+
+const { mapGetters, mapActions } = createNamespacedHelpers('game');
 
 export default {
   name: 'PlayGround',
