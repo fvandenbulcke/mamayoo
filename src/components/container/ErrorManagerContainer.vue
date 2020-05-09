@@ -14,7 +14,7 @@ export default {
 
   watch: {
     message() {
-      this.$router.push({ name: 'home' });
+      // this.$router.push({ name: 'home' });
     },
   },
 };
