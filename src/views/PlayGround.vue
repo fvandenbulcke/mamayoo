@@ -46,7 +46,6 @@
         </template>
         <template v-else-if="gameStatus === 'PlayingState'">
           <Dice
-            :mamayooDice="mamayooDice"
             :on-roll-dice="rollDice"
             :have-to-be-rolled="localPlayer.haveToRollDice"
           />
@@ -138,7 +137,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['players', 'localPlayer', 'playerCards', 'otherPlayers', 'gameStatus', 'maxCardToSelect', 'mamayooDice']),
+    ...mapGetters(['players', 'localPlayer', 'playerCards', 'otherPlayers', 'gameStatus', 'maxCardToSelect']),
 
     actionIsAvaillable() {
       return this.selectedCardIds.length === this.maxCardToSelect;

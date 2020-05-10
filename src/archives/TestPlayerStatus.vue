@@ -13,17 +13,27 @@
         </div>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col
+        class="d-flex justify-center"
+      >
+        <Dice
+          :on-roll-dice="()=>{}"
+          :have-to-be-rolled="true"
+        />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
 import PlayerStatus from '@/components/players/PlayerStatus';
+import Dice from '@/components/dices/Dice';
 
 export default {
   name: 'TestPlayerStatus',
-  display: 'TestPlayerStatus',
-  order: 1,
   components: {
     PlayerStatus,
+    Dice,
   },
   data() {
     return {

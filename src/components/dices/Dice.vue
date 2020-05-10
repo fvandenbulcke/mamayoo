@@ -98,32 +98,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  * {
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
-  }
-  html {
-    font-family: system-ui, sans-serif;
-  }
-  main {
-    background: linear-gradient(#454545, #676767, #454545);
-    display: grid;
-    grid-template-columns: 1fr;
-    height: 100vh;
-    width: 100%;
-  }
-  body {
-    overflow: hidden;
-  }
   .dice {
-    align-items: center;
-    display: grid;
-    grid-gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-    grid-template-rows: auto;
     justify-items: center;
-    padding: 2rem;
+    padding-bottom: 2rem;
     perspective: 600px;
   }
   .die-list {
@@ -147,10 +124,6 @@ export default {
     box-shadow: inset -0.35rem 0.35rem 0.75rem rgba(0, 0, 0, 0.3),
       inset 0.5rem -0.25rem 0.5rem rgba(0, 0, 0, 0.15);
     display: grid;
-    grid-template-areas: "one";
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    height: 100%;
     position: absolute;
     width: 100%;
   }
