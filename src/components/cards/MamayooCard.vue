@@ -18,14 +18,21 @@
         fluid
         class="pt-0 pb-0 mamayoo-content"
       >
-        <v-row no-gutters class="justify-start">
-          <span>{{ suitIcons[card.suit] }}</span>
-        </v-row>
-        <v-row no-gutters class="justify-center">
+        <v-row no-gutters class="justify-start mamayoo-content-value">
           <span>{{ card.value }}</span>
         </v-row>
-        <v-row no-gutters class="justify-end">
-          <span>{{ suitIcons[card.suit] }}</span>
+        <v-row no-gutters align="center" class="justify-center mamayoo-content-suit">
+          <v-img v-if="card.suit === 'mayoo'"
+            :class="{
+              'opacity05': this.card.notPlayable,
+            }"
+            src="@/assets/mamayoo.svg"
+            aspect-ratio="1"
+          />
+          <template v-else>{{ suitIcons[card.suit] }}</template>
+        </v-row>
+        <v-row no-gutters class="justify-end mamayoo-content-value">
+          <span>{{ card.value }}</span>
         </v-row>
       </v-container>
     </v-card-text>
@@ -92,6 +99,9 @@ export default {
     user-select: none;
     cursor: pointer;
   }
+  .mamayoo-card:hover{
+    transform: translateY(-20px);
+  }
   .card-selected {
     transform: translateY(-20px);
   }
@@ -107,5 +117,8 @@ export default {
   }
   @keyframes blinker {
     50% { border-color: white; }
+  }
+  .opacity05 {
+    opacity: 0.5;
   }
 </style>

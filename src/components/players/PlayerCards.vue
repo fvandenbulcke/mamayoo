@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex flex-wrap">
     <mamayoo-card
+      class="player-card"
       v-for="card in gameCards"
       :key="card.id"
       :card="card"
@@ -35,9 +36,14 @@ export default {
 };
 </script>
 <style scoped>
-  .v-card >>> .v-card__text .mamayoo-content{
+  .player-card >>> .mamayoo-card-content .mamayoo-content {
     height: 150px;
     width: 70px;
-    font-size: x-large;
+  }
+  .player-card >>> .mamayoo-card-content .mamayoo-content-value {
+    font-size: large;
+  }
+  .player-card >>> .mamayoo-card-content .mamayoo-content-suit {
+    font-size: xx-large;
   }
 </style>

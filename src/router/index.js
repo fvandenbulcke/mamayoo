@@ -8,6 +8,7 @@ import PlayConnectionContainer from '@/components/container/PlayConnectionContai
 import ErrorManagerContainer from '@/components/container/ErrorManagerContainer';
 import PlayGround from '@/views/PlayGround';
 import TestDragNDrop from '@/archives/TestDragNDrop';
+import TestPlayerCards from '@/archives/TestPlayerCards';
 import TestPlayerStatus from '@/archives/TestPlayerStatus';
 import TestCardsZone from '@/archives/TestCardsZone';
 
@@ -30,6 +31,11 @@ const router = new VueRouter({
       path: '/test/drag',
       name: 'testDragNDrop',
       component: TestDragNDrop,
+    },
+    {
+      path: '/test/pcards',
+      name: 'testPlayerCards',
+      component: TestPlayerCards,
     },
     {
       path: '/test/status',

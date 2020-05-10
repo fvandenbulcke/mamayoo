@@ -35,6 +35,7 @@
                     :isSelected="false"
                     :isDisable="false"
                     :onClick="() => {}"
+                    :isWinning="false"
                   />
                 </draggable>
               </v-col>
@@ -63,6 +64,7 @@
                     :isSelected="false"
                     :isDisable="false"
                     :onClick="() => {}"
+                    :isWinning="false"
                   />
                 </draggable>
               </v-col>
@@ -82,6 +84,7 @@
             :isSelected="false"
             :isDisable="false"
             :onClick="() => {}"
+            :isWinning="false"
           />
         </draggable>
       </v-col>
@@ -95,6 +98,7 @@
             :isSelected="false"
             :isDisable="false"
             :onClick="() => {}"
+            :isWinning="false"
           />
         </draggable>
       </v-col>
@@ -127,7 +131,7 @@ export default {
         { id: 6, suit: 'spade', value: '1' },
       ],
       cards1: [
-        { id: 1, suit: 'heart', value: '8' },
+        { id: 1, suit: 'mayoo', value: '8' },
         { id: 2, suit: 'spade', value: '3' },
         { id: 3, suit: 'club', value: '5' },
       ],

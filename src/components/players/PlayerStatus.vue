@@ -61,12 +61,12 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style scoped>
   .player-status-card-text {
     min-height: 68px;
   }
 
-  .player-status-playcard .mamayoo-card-content {
-    font-size: large;
+  .player-status-playcard >>> .mamayoo-card-content .mamayoo-content {
+    font-size: medium;
   }
 </style>
