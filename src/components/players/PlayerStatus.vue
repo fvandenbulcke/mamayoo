@@ -22,7 +22,7 @@
         :value="player.score"
       />
       <v-img v-if="player.winTurn" src="@/assets/bomb.gif" aspect-ratio="1.7"/>
-      <v-img v-else-if="player.hasPlayed7ofRequestedSuit"
+      <v-img v-else-if="player.hasPlayed7ofDiceSuit"
         src="@/assets/troll.gif" aspect-ratio="1.7"/>
       <mamayoo-card
         v-else-if="player.playedCard"
